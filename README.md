@@ -1,17 +1,5 @@
 **Documentação do Sistema**
 
-**\<ATENÇÃO\>**
-
-\<BAIXE ESTE DOCUMENTO PARA SUA MÁQUINA. INSIRA ESTE ARQUIVO NO GITHUB
-(DEIXE COMO RAW). COMPARTILHE O LINK COM O ORIENTADOR.
-profkesede64@gmail.com\>
-
-\<APAGUE TODAS AS INSTRUÇÕES EM VERMELHO DA SUA CÓPIA. AS INSTRUÇÕES
-PODERÃO SER CONSULTADAS A PARTIR DESTE ORIGINAL.\>
-
-\<PARA PREENCHIMENTO DA SUA CÓPIA, SIGA AS DATAS NO ARQUIVO
-"**CALENDÁRIO DE PROJETOS.2025.1**"\>
-
 SUMÁRIO
 
 [[Dados do Cliente 2]{.underline}](#dados-do-cliente)
@@ -61,18 +49,15 @@ SUMÁRIO
 </tbody>
 </table>
 
-Título do Projeto: \<**Título do projeto:** no título deve constar,
-resumidamente, qual problema o software está resolvendo. Ex.:
-**PneuMático: um trocador automático de pneus**\>. Este título deve ser
-idêntico ao da planilha "Equipes&Projetos"
+Título do Projeto: CHOCOMEIRE: um site para gerenciamento de encomendas de doces
 
-Cliente: \<razão social/nome do cliente\>
+Cliente:
 
-CNPJ/CPF: \<CNPJ/CPF do cliente\>
+CNPJ/CPF:
 
-Contato: \<nome do contato\>
+Contato:
 
-Email do contato: \<email do contato\>
+Email do contato:
 
 <table>
 <colgroup>

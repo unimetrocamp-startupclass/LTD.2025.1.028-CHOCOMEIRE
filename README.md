@@ -160,6 +160,7 @@ Não serão implementadas:
 - **HTML/CSS/JS**: Interface do usuário
 - **SQLite/**: Banco de dados
 - **SQLAlchemy/**: orientação a objetos
+- **PythonAnywhere/**: hospedagem do site
 - **Lucidchart/Draw.io**: Criação dos diagramas
 
 ### Arquitetura do Sistema

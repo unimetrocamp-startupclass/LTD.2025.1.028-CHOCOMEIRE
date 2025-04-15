@@ -37,7 +37,7 @@
 
 | Nome completo       | Curso              | Disciplina                 |
 |---------------------|--------------------|----------------------------|
-|João Victor Romagnoli Vendito | Ciência da Computação  | Programação Orientada a Objetos em JAVA                            |
+|João Victor Romagnoli Vendito | Ciência da Computação  | Programação Orientada a Objetos em JAVA                           |
 |João Paulo da Silva Júnior    | Ciência da Computação  | Programação Orientada a Objetos em JAVA                           |
 |                     |                    |                            |
 |                     |                    |                            |
@@ -73,8 +73,6 @@ Não serão implementadas:
 ---
 
 ## 4. Backlogs do Produto 📋
-
-# Backlog do Projeto CHOCOMEIRE
 
 ## 1. Configuração Inicial
 ### Épico: Configuração do Ambiente
@@ -158,9 +156,10 @@ Não serão implementadas:
 - MER (Modelo Entidade Relacionamento)
 
 ### Tecnologias Utilizadas
-- **Python + Flask/Django**: Backend
+- **Python + Flask**: Backend
 - **HTML/CSS/JS**: Interface do usuário
-- **SQLite/MySQL**: Banco de dados
+- **SQLite/**: Banco de dados
+- **SQLAlchemy/**: orientação a objetos
 - **Lucidchart/Draw.io**: Criação dos diagramas
 
 ### Arquitetura do Sistema

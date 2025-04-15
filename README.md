@@ -38,7 +38,7 @@
 | Nome completo       | Curso              | Disciplina                 |
 |---------------------|--------------------|----------------------------|
 |João Victor Romagnoli Vendito | Ciência da Computação  | Programação Orientada a Objetos em JAVA                            |
-|                     |                    |                            |
+|João Paulo da Silva Júnior    | Ciência da Computação  | Programação Orientada a Objetos em JAVA                           |
 |                     |                    |                            |
 |                     |                    |                            |
 |                     |                    |                            |

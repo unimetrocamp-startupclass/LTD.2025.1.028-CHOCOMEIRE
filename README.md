@@ -39,8 +39,6 @@
 |---------------------|--------------------|----------------------------|
 |João Victor Romagnoli Vendito | Ciência da Computação  | Programação Orientada a Objetos em JAVA                           |
 |João Paulo da Silva Júnior    | Ciência da Computação  | Programação Orientada a Objetos em JAVA                           |
-|                     |                    |                            |
-|                     |                    |                            |
 
 **Professor Orientador:** Kesede Rodrigues Junior
 
@@ -60,17 +58,91 @@ Criar um site dinâmico e eficiente para o gerenciamento de encomendas de doces,
 
 ## 3. Escopo 🎯
 
-O sistema permitirá:
-- Cadastro de pedidos com data, tipo de doce e status.
-- Visualização e edição dos pedidos.
+### Funcionalidades para Clientes
+- **Cadastro e Login:** Autenticação segura para clientes.
+- **Catálogo de Produtos:** Visualização de doces disponíveis com descrição e preços.
+- **Carrinho de Compras:** Gerenciamento de itens adicionados ao carrinho.
+- **Finalização de Pedidos:** Confirmação de compra e cálculo do total com resumo do pedido.
+- **Rastreamento de Pedidos:** Status do pedido (ex.: "em preparo" ou "entregue").
 
-Não serão implementadas:
-- Integração com meios de pagamento.
-- Sistema de entrega.
-
-(OBS: Com o decorrer do projeto pode ser feito alterações nas implementações!)
+### Funcionalidades para Administradores (Confeiteiros)
+- **Login Administrativo:** Acesso seguro ao painel de controle.
+- **Gerenciamento de Produtos:** Adicionar, editar ou remover doces no catálogo.
+- **Visualização de Pedidos:** Lista de pedidos feitos pelos clientes com detalhamento.
+- **Atualização de Status:** Controle do progresso do pedido.
 
 ---
+
+## Tecnologias e Ferramentas
+- **Linguagem de Programação:** Python.
+- **Framework:** Flask (para construir o back-end e estruturar o site).
+- **Banco de Dados:** SQLite (leve e integrado, perfeito para começar).
+- **ORM:** SQLAlchemy (orientação a objetos para interação com o banco de dados).
+- **Hospedagem:** PythonAnywhere (fácil de configurar e mantém o projeto na nuvem).
+
+---
+
+## Estrutura do Banco de Dados
+
+### Tabelas principais
+1. **Clientes**
+   - `id`: Chave primária, único.
+   - `nome`: Nome do cliente.
+   - `email`: Email do cliente.
+   - `senha`: Hash para segurança.
+
+2. **Produtos**
+   - `id`: Chave primária, único.
+   - `nome`: Nome do produto.
+   - `descrição`: Descrição detalhada do doce.
+   - `preco`: Preço unitário.
+   - `quantidade_disponível`: Estoque disponível.
+
+3. **Pedidos**
+   - `id`: Chave primária, único.
+   - `id_cliente`: Chave estrangeira para a tabela de clientes.
+   - `id_produto`: Chave estrangeira para a tabela de produtos.
+   - `quantidade`: Quantidade do produto.
+   - `preco_total`: Preço total do pedido.
+   - `status`: Status do pedido (ex.: "em preparo", "pronto", "entregue").
+
+---
+
+## Fluxo de Desenvolvimento
+
+### Fase 1: Planejamento
+- Mapear os requisitos detalhados (ex.: número de páginas, funcionalidades adicionais).
+- Criar protótipos simples do layout e fluxo.
+
+### Fase 2: Desenvolvimento
+1. **Configuração do ambiente**
+   - Criar o projeto Flask e instalar dependências (Flask, SQLAlchemy, Flask-WTF, etc.).
+   - Configurar o banco de dados SQLite.
+
+2. **Implementação**
+   - Criar as classes Python (ex.: Cliente, Produto, Pedido) e mapear com SQLAlchemy.
+   - Desenvolver rotas Flask (ex.: `/novo_pedido`, `/listar_produtos`).
+   - Utilizar templates HTML e CSS para o front-end.
+
+### Fase 3: Testes
+- Validar o sistema de login e segurança.
+- Testar rotas, funcionalidades e integração com banco de dados.
+- Garantir que o design seja responsivo.
+
+### Fase 4: Implantação
+- Configurar o projeto no PythonAnywhere.
+- Realizar testes de produção para confirmar funcionalidade.
+
+### Fase 5: Feedback e Ajustes
+- Coletar opiniões de usuários e confeiteiros.
+- Corrigir erros e implementar melhorias conforme necessário.
+
+---
+
+## Resultados Esperados
+- Um sistema funcional e intuitivo.
+- Gestão eficiente de pedidos de doces e catálogo de produtos.
+- Escalabilidade para adicionar novas funcionalidades no futuro.
 
 ## 4. Backlogs do Produto 📋
 
@@ -210,7 +282,7 @@ O sistema digitalizou e otimizou o controle das encomendas, eliminando erros e m
 ### FENETEC
 - Link do vídeo da apresentação
 - Fotos e legendas
-- Lista de visitantes com nome e email
+- Lista de visitantes com nome e emai
 
 ---
 
@@ -239,8 +311,3 @@ Relato individual.
 
 ### Nome do aluno 4
 Relato individual.
-
-### Nome do aluno 5
-Relato individual.
-
----

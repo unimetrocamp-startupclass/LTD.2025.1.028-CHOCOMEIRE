@@ -41,7 +41,6 @@
 |João Paulo da Silva Júnior    | Ciência da Computação  | Programação Orientada a Objetos em JAVA                           |
 |                     |                    |                            |
 |                     |                    |                            |
-|                     |                    |                            |
 
 **Professor Orientador:** Kesede Rodrigues Junior
 
@@ -55,7 +54,7 @@ O cliente identificou dificuldades no controle e organização das encomendas de
 
 ## 2. Objetivo 📌
 
-Automatizar o controle de pedidos de doces, substituindo anotações manuais por um sistema digital de gestão de encomendas, garantindo maior organização e precisão no atendimento.
+Criar um site dinâmico e eficiente para o gerenciamento de encomendas de doces, atendendo às necessidades tanto dos clientes quanto dos proprietários do negócio. A plataforma será um ambiente digital, onde os usuários poderão realizar encomendas de doces personalizados com facilidade e praticidade, enquanto o proprietário terá controle total sobre os pedidos, o estoque e o fluxo de trabalho.
 
 ---
 
@@ -75,10 +74,74 @@ Não serão implementadas:
 
 ## 4. Backlogs do Produto 📋
 
-- Cadastro de pedidos: Formulário com campos para nome do cliente, tipo de doce, data de entrega.
-- Listagem de pedidos: Tabela com filtros por data/status.
-- Edição de pedidos: Possibilita atualizar status ou dados do pedido.
-- Exclusão de pedidos: Permite cancelar pedidos (Permitidas com até 5 dias úteis antes da entrega).
+# Backlog do Projeto CHOCOMEIRE
+
+## 1. Configuração Inicial
+### Épico: Configuração do Ambiente
+- **Tarefa:** Criar o repositório do projeto.
+- **Tarefa:** Configurar o ambiente Flask.
+  - *Subtarefa:* Instalar Flask, SQLAlchemy e outras dependências.
+  - *Subtarefa:* Configurar SQLite como banco de dados local.
+- **Tarefa:** Criar estrutura básica de diretórios (ex.: templates, static, models).
+
+## 2. Desenvolvimento do Back-end
+### Épico: Implementação das Classes e Banco de Dados
+- **Tarefa:** Criar classe `Cliente` com SQLAlchemy.
+- **Tarefa:** Criar classe `Produto` com SQLAlchemy.
+- **Tarefa:** Criar classe `Pedido` com SQLAlchemy.
+  - *Subtarefa:* Configurar tabelas e chaves primárias/estrangeiras.
+- **Tarefa:** Implementar métodos específicos nas classes (ex.: cálculo do total do pedido).
+
+### Épico: Desenvolvimento das Rotas Flask
+- **Tarefa:** Criar rota `/cadastro_cliente`.
+- **Tarefa:** Criar rota `/login_cliente`.
+- **Tarefa:** Criar rota `/listar_produtos`.
+- **Tarefa:** Criar rota `/novo_pedido`.
+- **Tarefa:** Criar rota `/atualizar_status_pedido`.
+
+## 3. Desenvolvimento do Front-end
+### Épico: Design Responsivo
+- **Tarefa:** Criar layout básico usando Bootstrap/Tailwind CSS.
+  - *Subtarefa:* Design da página inicial.
+  - *Subtarefa:* Design da página de catálogo de produtos.
+  - *Subtarefa:* Design da página de carrinho de compras.
+
+### Épico: Integração Front-end com Back-end
+- **Tarefa:** Utilizar templates Jinja2 para renderizar dados do back-end.
+- **Tarefa:** Implementar formulários HTML para cadastro e login (usando Flask-WTF).
+
+## 4. Funcionalidades Adicionais
+### Épico: Implementação de Autenticação
+- **Tarefa:** Criar sistema de autenticação com hash de senha (ex.: werkzeug.security).
+- **Tarefa:** Implementar validação de sessões para acesso seguro ao site.
+
+### Épico: Carrinho e Pagamento
+- **Tarefa:** Implementar funcionalidade de carrinho.
+- **Tarefa:** Integrar com APIs de pagamento (opcional).
+
+## 5. Testes e Validação
+### Épico: Testes Automatizados
+- **Tarefa:** Escrever testes para rotas Flask (ex.: com pytest ou unittest).
+- **Tarefa:** Validar a interação do sistema com o banco de dados.
+
+### Épico: Feedback do Usuário
+- **Tarefa:** Criar ambiente de testes para coletar sugestões dos clientes/confeiteiros.
+- **Tarefa:** Implementar melhorias com base no feedback.
+
+## 6. Implantação
+### Épico: Hospedagem e Configuração
+- **Tarefa:** Configurar o projeto no PythonAnywhere.
+  - *Subtarefa:* Subir o código para o servidor.
+  - *Subtarefa:* Configurar o banco de dados remoto SQLite.
+
+### Épico: Monitoramento
+- **Tarefa:** Configurar logs no servidor para monitorar erros.
+- **Tarefa:** Implementar ferramentas de análise de uso, como Google Analytics.
+
+## 7. Marketing e Expansão
+### Épico: Divulgação
+- **Tarefa:** Criar contas nas redes sociais para promover o CHOCOMEIRE.
+- **Tarefa:** Desenvolver páginas dedicadas para promoções e contato.
 
 ---
 

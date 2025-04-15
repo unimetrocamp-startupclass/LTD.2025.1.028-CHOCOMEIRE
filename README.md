@@ -21,15 +21,15 @@
 
 ## Dados do Cliente
 
-**Título do Projeto:** 
+**Título do Projeto:** Chocomeire - Um site para gerenciamento de encomendas de doces
 
-**Cliente:** 
+**Cliente:** Edimeire Bezerra Romagnoli
 
-**CNPJ/CPF:** 
+**CNPJ/CPF:**  51.609.434/0001-24
 
-**Contato:** 
+**Contato:** (19) 99456-4187
 
-**Email do contato:** 
+**Email do contato:** meire_venditoo@hotmail.com
 
 ---
 
@@ -37,29 +37,29 @@
 
 | Nome completo       | Curso              | Disciplina                 |
 |---------------------|--------------------|----------------------------|
-|                     |                    |                            |
+|João Victor Romagnoli Vendito | Ciência da Computação  | Programação Orientada a Objetos em JAVA                            |
 |                     |                    |                            |
 |                     |                    |                            |
 |                     |                    |                            |
 |                     |                    |                            |
 
-**Professor Orientador:** 
+**Professor Orientador:** Kesede Rodrigues Junior
 
 ---
 
-## 1. Introdução
+## 1. Introdução 💡
 
-O cliente identificou dificuldades no controle e organização das encomendas de doces, como anotações manuais, esquecimentos de pedidos e falta de acompanhamento eficaz. Para solucionar isso, será desenvolvido um sistema web de gerenciamento de pedidos que permita registrar, acompanhar e organizar as encomendas de forma centralizada. As tecnologias utilizadas incluem Python, HTML, CSS, JavaScript e banco de dados relacional. O sistema trará praticidade e organização ao processo do cliente, otimizando a gestão das encomendas.
+O cliente identificou dificuldades no controle e organização das encomendas de doces, como anotações manuais, esquecimentos de pedidos e falta de acompanhamento eficaz. Para solucionar isso, será desenvolvido um sistema web de gerenciamento de pedidos que permita registrar, acompanhar e organizar as encomendas de forma centralizada. As tecnologias utilizadas... 
 
 ---
 
-## 2. Objetivo
+## 2. Objetivo 📌
 
 Automatizar o controle de pedidos de doces, substituindo anotações manuais por um sistema digital de gestão de encomendas, garantindo maior organização e precisão no atendimento.
 
 ---
 
-## 3. Escopo
+## 3. Escopo 🎯
 
 O sistema permitirá:
 - Cadastro de pedidos com data, tipo de doce e status.
@@ -69,24 +69,26 @@ Não serão implementadas:
 - Integração com meios de pagamento.
 - Sistema de entrega.
 
+(OBS: Com o decorrer do projeto pode ser feito alterações nas implementações!)
+
 ---
 
-## 4. Backlogs do Produto
+## 4. Backlogs do Produto 📋
 
 - Cadastro de pedidos: Formulário com campos para nome do cliente, tipo de doce, data de entrega.
 - Listagem de pedidos: Tabela com filtros por data/status.
 - Edição de pedidos: Possibilita atualizar status ou dados do pedido.
-- Exclusão de pedidos: Permite apagar pedidos.
+- Exclusão de pedidos: Permite cancelar pedidos (Permitidas com até 5 dias úteis antes da entrega).
 
 ---
 
-## 5. Cronograma
+## 5. Cronograma 📅
 
 (Insira aqui o cronograma em forma de imagem ou tabela com as etapas por quinzena)
 
 ---
 
-## 6. Materiais e Métodos
+## 6. Materiais e Métodos  🧰
 
 ### Modelagem do Sistema
 - Diagrama de Casos de Uso
@@ -103,7 +105,7 @@ Não serão implementadas:
 
 ---
 
-## 7. Resultados
+## 7. Resultados 📈
 
 ### Protótipo
 (Insira prints das telas com descrição das funcionalidades)
@@ -113,7 +115,7 @@ Não serão implementadas:
 
 ---
 
-## 8. Conclusão
+## 8. Conclusão ☑️
 
 ### Impacto do sistema
 O sistema digitalizou e otimizou o controle das encomendas, eliminando erros e melhorando a organização.
@@ -124,7 +126,7 @@ O sistema digitalizou e otimizou o controle das encomendas, eliminando erros e m
 
 ---
 
-## 9. Homologação do MVP junto ao cliente
+## 9. Homologação do MVP junto ao cliente 👥
 
 (Fotos e legendas da apresentação do MVP ao cliente)
 
@@ -132,7 +134,7 @@ O sistema digitalizou e otimizou o controle das encomendas, eliminando erros e m
 
 ---
 
-## 10. Divulgação
+## 10. Divulgação 📢 
 
 ### LinkedIn do Projeto
 (Link para o perfil)
@@ -149,19 +151,19 @@ O sistema digitalizou e otimizou o controle das encomendas, eliminando erros e m
 
 ---
 
-## 11. Carta de Apresentação
+## 11. Carta de Apresentação ✉️
 
 (Trecho institucional de apresentação do projeto e convite à participação do cliente)
 
 ---
 
-## 12. Carta de Autorização
+## 12. Carta de Autorização ✍️
 
 (Declaração de autorização assinada pelo cliente para execução do projeto)
 
 ---
 
-## 13. Relato individual do processo
+## 13. Relato individual do processo 💬
 
 ### Nome do aluno 1
 Relato individual.

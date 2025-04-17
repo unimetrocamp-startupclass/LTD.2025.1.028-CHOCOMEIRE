@@ -300,13 +300,70 @@ www.linkedin.com/in/chocomeire-ltda-2a1a60360
 
 ## 11. Carta de Apresentação ✉️
 
-(Trecho institucional de apresentação do projeto e convite à participação do cliente)
+Vimos por meio desta apresentar o grupo de acadêmicos do **Centro Universitário Unimetrocamp**, localizado na **Av. Sales de Oliveira, 1661 - Campinas - SP**, a fim de convidá-lo a participar de uma atividade extensionista associada ao componente curricular **ARA0075 - Programação Orientada à Objeto**, sob responsabilidade do(a) orientador(a) **Prof. Kesede Rodrigues Julio**.
+
+Em consonância ao **Plano Nacional de Educação**, o **Centro Universitário Unimetrocamp** desenvolve o **Desenvolvimento de Software**, que, norteado pela metodologia da **Engenharia de Software**, tem por princípios:
+- Diagnóstico dos problemas/demandas/necessidades;
+- Participação ativa dos interessados/públicos participantes;
+- Construção dialógica, coletiva e experiencial de conhecimentos;
+- Planejamento de ações;
+- Desenvolvimento e avaliação das ações;
+- Sistematização dos conhecimentos.
+
+Nesse contexto, a disciplina mencionada tem como escopo:
+- Levantamento de requisitos;
+- Planejamento dos modelos;
+- Codificação dos modelos;
+- Testes dos códigos;
+- Homologação do MVP.
+
+Solicitamos o apoio da **Chocomeire** para a realização das seguintes atividades:
+- Diagnósticos através de reuniões agendadas;
+- Análises feitas pelos integrantes do time de desenvolvimento;
+- Levantamento de requisitos por meio de reuniões agendadas (online ou presencial);
+- Desenvolvimento de projeto utilizando **Metodologia Ágil Scrum**;
+- Mentorias com o professor da disciplina;
+- Pesquisas em documentações, repositórios e plataformas de IA.
+
+### Formalização:
+Em caso de aceite, solicitamos a assinatura da **Carta de Autorização**, formalizando as atividades e informações que o(s) aluno(s) poderá(ão) ter acesso.
+
+### Fórum de Acompanhamento:
+Registramos também o convite para o **fórum semestral de acompanhamento e avaliação das atividades realizadas**, que será comunicado previamente em convite específico.
+
+Desde já, nos colocamos à disposição para quaisquer esclarecimentos.
+
+**Local:** Campinas, 17 de Abril de 2025  
+**Assinatura:** Direção Acadêmica da IES  
+**Assinatura:** Docente
+
 
 ---
 
 ## 12. Carta de Autorização ✍️
 
-(Declaração de autorização assinada pelo cliente para execução do projeto)
+
+Eu, **Edimeire Bezerra Romagnoli**, Confeiteira da Chocomeire, autorizo a realização das seguintes atividades acadêmicas do componente extensionista **ARA0075 - Programação Orientada à Objeto**, do **Centro Universitário Unimetrocamp**, sob orientação do(a) **Prof. Kesede Rodrigues Julio**:
+
+### Atividades Autorizadas:
+- Realização de um site para gerenciamento de encomendas de doces.
+
+#### Alunos Autorizados:
+| Nome                          | Curso                   | Matrícula     |
+|--------------------------------|-------------------------|--------------|
+| João Victor Romagnoli Vendito  | Ciência da Computação   | 202402531425 |
+| João Paulo da Silva Júnior     | Ciência da Computação   | 202402531409 |
+
+Declaro que fui informado por meio da Carta de Apresentação sobre as características e objetivos das atividades que serão realizadas na organização/instituição/empresa a qual represento e afirmo estar ciente de tratar-se de uma atividade realizada com intuito exclusivo de ensino de alunos de graduação, sem a finalidade de exercício profissional.
+
+### Autorizo, em caráter de confidencialidade:
+- O acesso a informações e dados necessários à execução da atividade;
+- O registro de imagem por meio de fotografias;
+- Outro:
+
+**Local:** Campinas, 17 de Abril de 2025  
+**Assinatura:** Edimeire Bezerra Romagnoli  
+
 
 ---
 
@@ -318,8 +375,3 @@ Relato individual.
 ### Nome do aluno 2
 Relato individual.
 
-### Nome do aluno 3
-Relato individual.
-
-### Nome do aluno 4
-Relato individual.

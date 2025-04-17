@@ -283,7 +283,8 @@ O sistema digitalizou e otimizou o controle das encomendas, eliminando erros e m
 ## 10. Divulgação 📢 
 
 ### LinkedIn do Projeto
-(Link para o perfil)
+www.linkedin.com/in/chocowww.linkedin.com/in/meire-ltda-2a1a60360
+
 
 ### Seminário de Projetos de Software
 - Link do vídeo: 

@@ -283,8 +283,8 @@ O sistema digitalizou e otimizou o controle das encomendas, eliminando erros e m
 ## 10. Divulgação 📢 
 
 ### LinkedIn do Projeto
+![Linkedin.png](https://github.com/unimetrocamp-startupclass/LTD.2025.1.028-CHOCOMEIRE/blob/main/Linkedin.png)
 www.linkedin.com/in/chocomeire-ltda-2a1a60360
-
 
 ### Seminário de Projetos de Software
 - Link do vídeo: 

@@ -1,28 +1,65 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+<!DOCTYPE html> 
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chocomeire</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Certifique-se de que o caminho está correto -->
+    <title>Chocomeire - Bem-vindo!</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f6b6b3;
+        }
+
+        .navbar-custom {
+            background-color: #542616;
+        }
+
+        .navbar-custom .navbar-brand,
+        .navbar-custom .nav-link,
+        .navbar-custom .navbar-toggler-icon {
+            color: #fff;
+        }
+
+        .navbar-custom .nav-link:hover {
+            color: #d3b3a3;
+        }
+
+        .navbar-brand img {
+            height: 40px;
+            margin-right: 10px;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <img src="Logo Chocomeire.jpg" alt="Logo Chocomeire" class="logo">
-        <nav>
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">Início</li>
-                <li class="nav-item">Produtos</li>
-                <li class="nav-item">Login</li>
-                <li class="nav-item">Cadastro</li>
-            </ul>
-        </nav>
-    </header>
 
-    <section class="welcome">
+    <!-- Barra de navegação -->
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="/">
+                <!-- Caminho da logo atualizado -->
+                <img src="docs/Logo Chocomeire.jpg" alt="Logo Chocomeire">
+                Chocomeire
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/">Início</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/produtos">Produtos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/cadastro">Cadastro</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Conteúdo principal -->
+    <div class="container text-center mt-5">
         <h1>Bem-vindo à Chocomeire!</h1>
-        <p>Gerencie suas encomendas de doces com praticidade e sabor.</p>
-        <button>Ver Produtos</button>
-    </section>
+        <p class="lead">Gerencie suas encomendas de doces com praticidade e sabor.</p>
+        <a href="/produtos" class="btn btn-primary">Ver Produtos</a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

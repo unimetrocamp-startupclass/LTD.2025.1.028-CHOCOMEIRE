@@ -1,0 +1,61 @@
+/* Defina um estilo básico para o body */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilos para o header e logo */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #fff; /* Ajuste a cor de fundo se necessário */
+}
+
+.logo {
+    width: 100px; /* Ajuste o tamanho conforme necessário */
+    height: auto;
+}
+
+/* Estilos para a barra de navegação */
+.navbar-nav {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-item {
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+/* Estilos para a seção de boas-vindas */
+.welcome {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.welcome h1 {
+    font-size: 2rem;
+}
+
+.welcome p {
+    font-size: 1.2rem;
+}
+
+button {
+    background-color: #f5a623; /* Cor de fundo do botão */
+    border: none;
+    padding: 10px 20px;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #d48816; /* Cor do botão ao passar o mouse */
+}

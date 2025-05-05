@@ -236,7 +236,8 @@ Criar um site dinâmico e eficiente para o gerenciamento de encomendas de doces,
 
 ### Modelagem do Sistema
 - Diagrama de Casos de Uso
-- MER (Modelo Entidade Relacionamento)
+- Diagrama de Classes
+  
 
 ### Tecnologias Utilizadas
 - **Python + Flask**: Backend

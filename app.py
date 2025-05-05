@@ -1,4 +1,4 @@
-from flask import Flask, render_template  # type: ignore
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
@@ -19,4 +19,5 @@ def cadastro():
     return render_template('cadastro.html')
 
 if __name__ == '__main__':
+    # Habilita o modo de debug para reiniciar automaticamente e exibir erros detalhados
     app.run(debug=True)

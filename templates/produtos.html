@@ -4,6 +4,12 @@
 <div class="container mt-5">
     <h2>Produtos</h2>
     <p>Confira nossa lista de deliciosos produtos.</p>
-    <!-- Aqui você pode listar os produtos de maneira dinâmica -->
+    <ul class="list-group">
+        {% for produto in produtos %}
+            <li class="list-group-item">
+                <strong>{{ produto.nome }}</strong> - {{ produto.descricao }}
+            </li>
+        {% endfor %}
+    </ul>
 </div>
 {% endblock %}

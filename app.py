@@ -33,4 +33,37 @@ def produtos():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        email = request
+        email = request.form['email']
+        senha = request.form['senha']  # Corrigido para pegar a senha corretamente
+        usuario = User.query.filter_by(email=email).first()
+        
+        # Verifica se o usuário existe e se a senha está correta
+        if usuario and check_password_hash(usuario.senha, senha):
+            print(f"Login bem-sucedido com email: {email}")
+            return redirect(url_for('home'))  # Redireciona para a home após login
+        else:
+            print("Falha no login: email ou senha incorretos")
+            return redirect(url_for('login'))  # Volta para a página de login
+    return render_template('login.html')
+
+# Rota para a página de cadastro
+@app.route('/cadastro', methods=['GET', 'POST'])
+def cadastro():
+    if request.method == 'POST':
+        nome = request.form['nome']
+        email = request.form['email']
+        senha = request.form['senha']
+        
+        # Cria um hash da senha antes de salvar no banco de dados
+        senha_hash = generate_password_hash(senha)
+        novo_usuario = User(nome=nome, email=email, senha=senha_hash)
+        
+        db.session.add(novo_usuario)
+        db.session.commit()
+        
+        print(f"Novo cadastro: {nome}, {email}")
+        return redirect(url_for('home'))  # Redireciona para a home após o cadastro
+    return render_template('cadastro.html')
+
+if __name__ == '__main__':
+    app.run(debug=True)

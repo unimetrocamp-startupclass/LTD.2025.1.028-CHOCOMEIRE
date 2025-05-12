@@ -232,12 +232,15 @@ Criar um site dinâmico e eficiente para o gerenciamento de encomendas de doces,
 
 ---
 
+
 ## 6. Materiais e Métodos  🧰
 
 ### Modelagem do Sistema
 - Diagrama de Casos de Uso
+![Diagrama de Casos de Uso](docs/diagrama.casos.uso.png)
+
 - Diagrama de Classes
-  
+![Diagrama de Classes](docs/diagrama.classes.png)
 
 ### Tecnologias Utilizadas
 - **Python + Flask**: Backend

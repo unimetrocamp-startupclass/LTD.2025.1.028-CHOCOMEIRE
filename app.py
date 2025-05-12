@@ -1,6 +1,18 @@
 from flask import Flask, render_template, request, redirect, url_for
+from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
+
+# Modelo de User
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nome = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(100), unique=True, nullable=False)
+    senha = db.Column(db.String(200), nullable=False)
 
 # Rota para a página inicial
 @app.route('/')
@@ -21,24 +33,4 @@ def produtos():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        email = request.form['email']
-        senha = request.form['senha']
-        # Aqui você pode adicionar lógica de autenticação
-        print(f"Login com email: {email} e senha: {senha}")
-        return redirect(url_for('home'))  # Redireciona para a home após login
-    return render_template('login.html')
-
-# Rota para a página de cadastro
-@app.route('/cadastro', methods=['GET', 'POST'])
-def cadastro():
-    if request.method == 'POST':
-        nome = request.form['nome']
-        email = request.form['email']
-        senha = request.form['senha']
-        # Aqui você pode salvar os dados do usuário em um banco de dados ou outro armazenamento
-        print(f"Novo cadastro: {nome}, {email}")
-        return redirect(url_for('home'))  # Redireciona para a home após o cadastro
-    return render_template('cadastro.html')
-
-if __name__ == '__main__':
-    app.run(debug=True)
+        email = request

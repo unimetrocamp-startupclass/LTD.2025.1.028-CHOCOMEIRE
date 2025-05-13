@@ -1,0 +1,22 @@
+body {
+    background-color: #f6b6b3;
+}
+
+.navbar-custom {
+    background-color: #542616;
+}
+
+.navbar-custom .navbar-brand,
+.navbar-custom .nav-link,
+.navbar-custom .navbar-toggler-icon {
+    color: #fff;
+}
+
+.navbar-custom .nav-link:hover {
+    color: #d3b3a3;
+}
+
+.navbar-brand img {
+    height: 40px;
+    margin-right: 10px;
+}

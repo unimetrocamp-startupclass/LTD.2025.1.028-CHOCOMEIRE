@@ -257,24 +257,91 @@ Criar um site dinâmico e eficiente para o gerenciamento de encomendas de doces,
 
 ## 7. Resultados 📈
 
-### Protótipo
+### Protótipo e códigos das principais funcionalidades
 
 Aqui estão as telas do sistema:
 
 #### Tela Inicial
 ![Tela Inicial](statics/tela.inicial.png)
+```html
+<!-- Página inicial: boas-vindas e botão para visualizar os produtos -->
+
+<main class="container text-center mt-5">
+    <!-- Título de boas-vindas -->
+    <h1>Bem-vindo à Chocomeire!</h1>
+
+    <!-- Descrição da proposta do site -->
+    <p>Gerencie suas encomendas de doces com praticidade e sabor.</p>
+
+    <!-- Botão que redireciona para a lista de produtos -->
+    <a href="/produtos" class="btn btn-primary">Ver Produtos</a>
+</main>
+```
 
 #### Tela de Produtos
 ![Tela Produtos](statics/tela.produtos.png)
+```html
+{% extends 'base.html' %}
 
+{% block content %}
+<div class="container mt-5">
+    <h2>Produtos</h2>
+    <p>Confira nossa lista de deliciosos produtos.</p>
+    <ul class="list-group">
+        {% for produto in produtos %}
+            <li class="list-group-item">
+                <strong>{{ produto.nome }}</strong> - {{ produto.descricao }}
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
+```
 #### Tela de Login
 ![Tela Login](statics/tela.login.png)
-
+```html
+<main class="container text-center mt-5">
+    <h1>Login</h1>
+    <p>Entre com suas credenciais para acessar sua conta.</p>
+    <form method="POST" action="/login">
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <div class="mb-3">
+            <label for="senha" class="form-label">Senha</label>
+            <input type="password" class="form-control" id="senha" name="senha" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Entrar</button>
+    </form>
+</main>
+```
 #### Tela de Cadastro
 ![Tela Cadastro](statics/tela.cadastro.png)
+```html
+{% extends 'base.html' %}
 
-### Códigos das principais funcionalidades
-(Insira trechos do código com comentários explicativos)
+{% block content %}
+<div class="container text-center mt-5">
+    <h2>Cadastro</h2>
+    <form method="POST" action="/cadastro">
+        <div class="mb-3">
+            <label for="nome" class="form-label">Nome</label>
+            <input type="text" class="form-control" id="nome" name="nome" required>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <div class="mb-3">
+            <label for="senha" class="form-label">Senha</label>
+            <input type="password" class="form-control" id="senha" name="senha" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
+    </form>
+</div>
+{% endblock %}
+```
 
 ---
 

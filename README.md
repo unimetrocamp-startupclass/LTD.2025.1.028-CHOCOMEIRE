@@ -262,16 +262,16 @@ Criar um site dinâmico e eficiente para o gerenciamento de encomendas de doces,
 Aqui estão as telas do sistema:
 
 #### Tela Inicial
-![Tela Inicial](statics/tela_inicial.png)
+![Tela Inicial](statics/tela.inicial.png)
 
 #### Tela de Produtos
-![Tela Produtos](statics/tela_produtos.png)
+![Tela Produtos](statics/tela.produtos.png)
 
 #### Tela de Login
-![Tela Login](statics/tela_login.png)
+![Tela Login](statics/tela.login.png)
 
 #### Tela de Cadastro
-![Tela Cadastro](statics/tela_cadastro.png)
+![Tela Cadastro](statics/tela.cadastro.png)
 
 ### Códigos das principais funcionalidades
 (Insira trechos do código com comentários explicativos)

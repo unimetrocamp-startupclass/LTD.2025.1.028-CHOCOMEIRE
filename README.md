@@ -358,9 +358,42 @@ O sistema digitalizou e otimizou o controle das encomendas, eliminando erros e m
 
 ## 9. Homologação do MVP junto ao cliente 👥
 
-(Fotos e legendas da apresentação do MVP ao cliente)
+<table>
+  <tr>
+    <td align="center">
+      <img src="static/foto1.png" alt="Foto 1" width="500" />
+      <br>
+      Apresentando as telas do site através do perfil no linkedin
+    </td>
+    <td align="center">
+      <img src="static/foto2.png" alt="Foto 2" width="500" />
+      <br>
+      Apresentando tela inicial do site
+    </td>
+  </tr>
+</table>
 
-(Lista de presença com imagem ou arquivo)
+<table>
+  <tr>
+    <td align="center">
+      <img src="static/foto3.png" alt="Foto 3" width="500" />
+      <br>
+      Apresentando e explicando como faremos a página de produtos
+    </td>
+    <td align="center">
+      <img src="static/foto4.png" alt="Foto 4" width="500" />
+      <br>
+      Apresentando perfil criado no linkedin
+    </td>
+  </tr>
+</table>
+
+### Lista de presença
+| Nome                      | Função             |
+|---------------------------|--------------------|
+| Edimeire Bezerra Romagnoli| Cliente/Confeiteira|
+| João Victor R. Vendito     | Desenvolvedor      |
+| João Paulo da Silva Júnior | Desenvolvedor      |
 
 ---
 

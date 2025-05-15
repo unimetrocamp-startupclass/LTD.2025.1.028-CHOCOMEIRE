@@ -237,10 +237,10 @@ Criar um site dinâmico e eficiente para o gerenciamento de encomendas de doces,
 
 ### Modelagem do Sistema
 - Diagrama de Casos de Uso
-![Diagrama de Casos de Uso](statics/diagrama.casos.uso.png)
+![Diagrama de Casos de Uso](static/diagrama.casos.uso.png)
 
 - Diagrama de Classes
-![Diagrama de Classes](statics/diagrama.classes.png)
+![Diagrama de Classes](static/diagrama.classes.png)
 
 ### Tecnologias Utilizadas
 - **Python + Flask**: Backend
@@ -262,7 +262,7 @@ Criar um site dinâmico e eficiente para o gerenciamento de encomendas de doces,
 Aqui estão as telas do sistema:
 
 #### Tela Inicial
-![Tela Inicial](statics/tela.inicial.png)
+![Tela Inicial](static/tela.inicial.png)
 ```html
 <!-- Página inicial: boas-vindas e botão para visualizar os produtos -->
 
@@ -279,7 +279,7 @@ Aqui estão as telas do sistema:
 ```
 
 #### Tela de Produtos
-![Tela Produtos](statics/tela.produtos.png)
+![Tela Produtos](static/tela.produtos.png)
 ```html
 {% extends 'base.html' %}
 
@@ -298,7 +298,7 @@ Aqui estão as telas do sistema:
 {% endblock %}
 ```
 #### Tela de Login
-![Tela Login](statics/tela.login.png)
+![Tela Login](static/tela.login.png)
 ```html
 <main class="container text-center mt-5">
     <h1>Login</h1>
@@ -317,7 +317,7 @@ Aqui estão as telas do sistema:
 </main>
 ```
 #### Tela de Cadastro
-![Tela Cadastro](statics/tela.cadastro.png)
+![Tela Cadastro](static/tela.cadastro.png)
 ```html
 {% extends 'base.html' %}
 
@@ -367,7 +367,7 @@ O sistema digitalizou e otimizou o controle das encomendas, eliminando erros e m
 ## 10. Divulgação 📢 
 
 ### LinkedIn do Projeto
-![Linkedin.png](https://github.com/unimetrocamp-startupclass/LTD.2025.1.028-CHOCOMEIRE/blob/main/statics/Linkedin.png)
+![Linkedin.png](https://github.com/unimetrocamp-startupclass/LTD.2025.1.028-CHOCOMEIRE/blob/main/static/Linkedin.png)
 www.linkedin.com/in/chocomeire-ltda-2a1a60360
 
 ### Seminário de Projetos de Software

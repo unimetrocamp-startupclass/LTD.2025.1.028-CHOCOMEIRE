@@ -20,3 +20,215 @@ body {
     height: 40px;
     margin-right: 10px;
 }
+
+.sabores-lista {
+    list-style: disc inside;
+    margin: 0 0 12px 0;
+    padding: 0;
+    text-align: left;
+    font-size: 1.08rem;
+    color: #4b3432;
+}
+
+.produto-preco {
+    color: #f36aa8;
+    font-size: 1.34rem;
+    font-weight: bold;
+    margin-top: 8px;
+    margin-bottom: 2px;
+    text-align: center;
+}
+
+.carrinho-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    margin-bottom: 24px;
+}
+.carrinho-item {
+    background: #fdf3ec;
+    border: 2px dotted #e0bba5;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    gap: 18px;
+}
+.imagem-carrinho {
+    width: 90px;
+    height: 60px;
+    border-radius: 10px;
+    object-fit: cover;
+    border: 2px solid #f6b6b3;
+}
+.carrinho-info h4 {
+    margin: 0 0 2px 0;
+}
+.carrinho-info p {
+    margin: 2px 0;
+    color: #4b3432;
+}
+.carrinho-total h3 {
+    color: #f36aa8;
+    text-align: right;
+}
+.btn-remover {
+    background: #f36aa8;
+    color: #fff;
+    border: none;
+    padding: 6px 16px;
+    border-radius: 8px;
+    margin-top: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+.btn-remover:hover {
+    background: #d1447e;
+}
+.carrinho-actions {
+    display: flex;
+    gap: 18px;
+    margin-top: 22px;
+}
+.btn-voltar {
+    background: #542616;
+    color: #fff;
+    padding: 10px 22px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+.btn-voltar:hover {
+    background: #3b2321;
+}
+
+.produtos-lista {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 48px;
+    justify-content: center;
+    margin-top: 16px;
+    margin-bottom: 32px;
+}
+
+.produto-card-grande {
+    background: #fdf3ec;
+    border-radius: 20px;
+    border: 4px dotted #e0bba5;
+    box-shadow: 0 2px 10px #0001;
+    padding: 28px 32px;
+    max-width: 520px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    transition: box-shadow 0.2s;
+    margin-bottom: 10px;
+}
+.produto-card-grande:hover {
+    box-shadow: 0 4px 20px #e86aa330;
+}
+.produto-info-grande {
+    text-align: left;
+    margin-bottom: 16px;
+}
+.produto-info-grande h3 {
+    margin: 0 0 10px 0;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #3b2321;
+    
+}
+
+.produto-info-grande h2 {
+    margin: 0 0 10px 0;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #3b2321;
+}
+
+.sabores-lista {
+    margin: 0 0 10px 0;
+    padding: 0 0 0 18px;
+    font-size: 1.08rem;
+    color: #4b3432;
+}
+.precos-produto {
+    margin: 14px 0 0 0;
+    font-size: 1.12rem;
+}
+.preco-cento {
+    color: #f36aa8;
+    font-weight: bold;
+    font-size: 1.08rem;
+    margin-right: 10px;
+}
+.preco-meio-cento {
+    color: #f36aa8;
+    font-weight: bold;
+    font-size: 1.08rem;
+    margin-right: 10px;
+}
+.btn-menor {
+    width: 28px;
+    height: 28px;
+    font-size: 1.15rem;
+    font-weight: bold;
+    border-radius: 50%;
+    border: none;
+    box-shadow: 0 2px 7px #0003;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 28px;
+    cursor: pointer;
+    z-index: 2;
+    transition: background 0.2s, color 0.2s;
+    padding: 0;
+    margin-left: 4px;
+}
+.btn-menor-esquerda {
+    background: #fff;
+    color: #f36aa8;
+    border: 1.5px solid #f36aa8;
+}
+.btn-menor-esquerda:hover {
+    background: #ffe6f2;
+    color: #f36aa8;
+}
+.btn-menor-direita {
+    background: #f36aa8;
+    color: #fff;
+}
+.btn-menor-direita:hover {
+    background: #f36aa8;
+    color: #fff;
+}
+.imagem-e-botoes-centralizada {
+    display: flex;
+    justify-content: center;
+    margin-top: 18px;
+}
+.imagem-produto-grande {
+    width: 290px;
+    height: 180px;
+    border-radius: 14px;
+    border: 2.5px dotted #e0bba5;
+    background: #fdf3ec;
+    box-shadow: 0 2px 10px #0001;
+    object-fit: cover;
+    display: block;
+}
+
+@media (max-width: 650px) {
+    .produto-card-grande {
+        padding: 12px 4vw;
+        max-width: 99vw;
+    }
+    .imagem-produto-grande {
+        width: 95vw;
+        max-width: 98vw;
+        height: 140px;
+    }
+}

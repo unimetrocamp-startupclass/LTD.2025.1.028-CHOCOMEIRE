@@ -1,15 +1,77 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container mt-5">
-    <h2>Produtos</h2>
-    <p>Confira nossa lista de deliciosos produtos.</p>
-    <ul class="list-group">
-        {% for produto in produtos %}
-            <li class="list-group-item">
-                <strong>{{ produto.nome }}</strong> - {{ produto.descricao }}
-            </li>
-        {% endfor %}
-    </ul>
+<h2>Produtos</h2>
+<div class="produtos-lista">
+    <div class="produto-card-grande">
+        <div class="produto-info-grande">
+            <h3>Docinhos Tradicionais</h3>
+            <h2>(Cento - 100uni. ou Meio Cento - 50uni.)</h2>
+            <ul class="sabores-lista">
+                <li>Brigadeiro</li>
+                <li>Brigadeiro Branco</li>
+                <li>Beijinho</li>
+                <li>Paçoquinha</li>
+                <li>Moranguinho</li>
+                <li>Limão</li>
+                <li>Casadinho (brigadeiro branco e tradicional)</li>
+                <li>Sensação (brigadeiro tradicional e moranguinho)</li>
+            </ul>
+            <div class="precos-produto">
+                <div>
+                    <b>Cento</b>(100unid.) (até 3 sabores): 
+                    <span class="preco-cento">R$110,00</span>
+                    <button class="btn-menor btn-menor-esquerda" onclick="removeFromCart('cento')" title="Remover Cento">−</button>
+                    <button class="btn-menor btn-menor-direita" onclick="addToCart('cento')" title="Adicionar Cento">+</button>
+                </div>
+                <div style="margin-top:8px;">
+                    <b>Meio Cento</b>(50unid.) (até 2 sabores): 
+                    <span class="preco-meio-cento">R$65,00</span>
+                    <button class="btn-menor btn-menor-esquerda" onclick="removeFromCart('meio_cento')" title="Remover Meio Cento">−</button>
+                    <button class="btn-menor btn-menor-direita" onclick="addToCart('meio_cento')" title="Adicionar Meio Cento">+</button>
+                </div>
+            </div>
+        </div>
+        <div class="imagem-e-botoes-centralizada">
+            <img src="{{ url_for('static', filename='docinhos1.png') }}" alt="Docinhos" class="imagem-produto-grande">
+        </div>
+    </div>
 </div>
+<div class="carrinho-link">
+    <a href="{{ url_for('carrinho') }}">Ver carrinho (<span id="cart-qty">0</span>)</a>
+</div>
+<script>
+function addToCart(productId) {
+    fetch('/add_to_cart', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({product_id: productId})
+    })
+    .then(response => response.json())
+    .then(data => updateCartQty(data.cart));
+}
+function removeFromCart(productId) {
+    fetch('/remove_from_cart', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({product_id: productId})
+    })
+    .then(response => response.json())
+    .then(data => updateCartQty(data.cart));
+}
+function updateCartQty(cart) {
+    let qty = 0;
+    for (let k in cart) { qty += cart[k]; }
+    document.getElementById('cart-qty').innerText = qty;
+}
+document.addEventListener('DOMContentLoaded', function() {
+    fetch('/add_to_cart', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({product_id: null})
+    })
+    .then(response => response.json())
+    .then(data => updateCartQty(data.cart || {}));
+});
+</script>
 {% endblock %}

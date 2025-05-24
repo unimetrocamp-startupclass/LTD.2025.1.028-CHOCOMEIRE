@@ -516,8 +516,9 @@ Declaro que fui informado por meio da Carta de Apresentação sobre as caracter�
 
 ## 13. Relato individual do processo 💬
 
-### Nome do aluno 1
-Relato individual.
+### João Victor Romagnóli Vendito - 202402531425
+
+Durante o desenvolvimento do projeto Chocomeire, tive a oportunidade de aplicar na prática diversos conceitos que aprendi ao longo do curso, especialmente na área de desenvolvimento web com Python e Flask. Participei ativamente na criação da estrutura do sistema, ajudando a organizar as rotas, conectar com o banco de dados SQLite e desenvolver funcionalidades essenciais para o gerenciamento das encomendas de doces. Embora tenha enfrentado algumas dificuldades com a lógica de algumas funcionalidades e com o uso de bibliotecas que ainda não dominava completamente, consegui superar esses obstáculos por meio de pesquisas, testes e colaboração com o colega. O projeto também me ajudou a entender melhor a importância da organização do código, do versionamento com Git e da comunicação em equipe. No geral, foi uma experiência bastante enriquecedora, que contribuiu para o meu crescimento tanto técnico quanto pessoal.
 
 ### Nome do aluno 2
 Relato individual.

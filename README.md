@@ -432,6 +432,11 @@ www.linkedin.com/in/chocomeire-ltda-2a1a60360
   </tr>
 </table>
 
+<p align="center">
+  <img src="static/lista.presenca.png" alt="Lista de Presença" width="600" />
+  <br>
+  Lista de presença do evento
+</p>
 
 ### FENETEC
 - Link do vídeo da apresentação

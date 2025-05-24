@@ -404,9 +404,34 @@ O sistema digitalizou e otimizou o controle das encomendas, eliminando erros e m
 www.linkedin.com/in/chocomeire-ltda-2a1a60360
 
 ### Seminário de Projetos de Software
-- Link do vídeo: 
-- Fotos e legendas da apresentação
-- Lista de presença
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="static/foto5.jpg" alt="Foto 5" width="500" />
+      <br>
+      Foto do ambiente de apresentação
+    </td>
+    <td align="center">
+      <img src="static/foto6.jpg" alt="Foto 6" width="500" />
+      <br>
+      Apresentando sobre a marca
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="static/foto7.jpg" alt="Foto 7" width="500" />
+      <br>
+      Apresentando sobre o projeto
+    </td>
+    <td align="center">
+      <img src="static/foto8.jpg" alt="Foto 8" width="500" />
+      <br>
+     Início da apresentação
+    </td>
+  </tr>
+</table>
+
 
 ### FENETEC
 - Link do vídeo da apresentação

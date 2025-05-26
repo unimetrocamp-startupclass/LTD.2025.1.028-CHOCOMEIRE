@@ -520,6 +520,8 @@ Declaro que fui informado por meio da Carta de Apresentação sobre as caracter�
 
 Durante o desenvolvimento do projeto Chocomeire, tive a oportunidade de aplicar na prática diversos conceitos que aprendi ao longo do curso, especialmente na área de desenvolvimento web com Python e Flask. Participei ativamente na criação da estrutura do sistema, ajudando a organizar as rotas, conectar com o banco de dados SQLite e desenvolver funcionalidades essenciais para o gerenciamento das encomendas de doces. Embora tenha enfrentado algumas dificuldades com a lógica de algumas funcionalidades e com o uso de bibliotecas que ainda não dominava completamente, consegui superar esses obstáculos por meio de pesquisas, testes e colaboração com o colega. O projeto também me ajudou a entender melhor a importância da organização do código, do versionamento com Git e da comunicação em equipe. No geral, foi uma experiência bastante enriquecedora, que contribuiu para o meu crescimento tanto técnico quanto pessoal.
 
-### Nome do aluno 2
-Relato individual.
+### João Paulo da Silva Júnior - 202402531409
+
+No decorrer do desenvolvimento do projeto CHOCOMEIRE, pude colocar em prática o estudo sobre Python e desenvolvimento web. Estive envolvido na implementação de funcionalidades das rotas da aplicação, front-end e integração do banco de dados.
+Aprendi a estruturar melhor as rotas com Flask, trabalhar com operações CRUD no banco de dados e integrar formulários HTML com o backend.Além da parte técnica, o projeto me proporcionou uma visão mais clara sobre a importância da organização do código e o uso do GitHub.No final, considero que essa experiência foi fundamental para o meu desenvolvimento, como futuro programador, e profissional preparado para trabalhar de forma colaborativa.
 

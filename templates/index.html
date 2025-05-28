@@ -1,11 +1,8 @@
----
-layout: default
-title: Bem-vindo à Chocomeire
----
-
+{% block content %}
 <div class="container text-center mt-5">
     <h1>Bem-vindo à Chocomeire!</h1>
     <p class="lead">Gerencie suas encomendas de doces com praticidade e sabor.</p>
-    <img src="/assets/doces.home.png" alt="Doces Chocomeire" class="img-fluid my-4">
+    <img src="{{ url_for('static', filename='doces.home.png') }}" alt="Doces Chocomeire" class="img-fluid my-4">
     <a href="/produtos" class="btn btn-primary">Ver Produtos</a>
 </div>
+{% endblock %}

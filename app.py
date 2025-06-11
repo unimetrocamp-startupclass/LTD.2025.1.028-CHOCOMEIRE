@@ -22,6 +22,9 @@ SABORES_LISTA = [
     'Sensação (brigadeiro tradicional e moranguinho)'
 ]
 
+# Sabores para bombons
+SABORES_BOMBOM_OUTROS = ['Branco', 'Meio Amargo', 'Licor', 'Crocante', 'Amendoim']
+
 PRODUTOS = [
     {
         'id': 'cento',
@@ -40,6 +43,24 @@ PRODUTOS = [
         'imagem': 'docinhos1.png',
         'sabores': SABORES_LISTA,
         'limite_sabores': 2
+    },
+    {
+        'id': 'bombom_ao_leite',
+        'nome': 'Bombom Ao Leite (Saquinho 12un)',
+        'descricao': 'Bombom ao leite',
+        'preco': 30.00,
+        'imagem': 'bombons.png',
+        'sabores': ['Ao leite'],
+        'limite_sabores': 1
+    },
+    {
+        'id': 'bombom_outros',
+        'nome': 'Bombom Outros Sabores (Saquinho 12un)',
+        'descricao': 'Bombom outros sabores',
+        'preco': 36.00,
+        'imagem': 'bombons.png',
+        'sabores': SABORES_BOMBOM_OUTROS,
+        'limite_sabores': 1
     }
 ]
 
@@ -49,8 +70,8 @@ def home():
 
 @app.route('/produtos')
 def produtos():
-    # Mostra o card agrupando os dois tamanhos
-    return render_template('produtos.html', produtos=PRODUTOS[:1])
+    # Mostra todos os produtos cadastrados
+    return render_template('produtos.html', produtos=PRODUTOS)
 
 @app.route('/add_to_cart', methods=['POST'])
 def add_to_cart():

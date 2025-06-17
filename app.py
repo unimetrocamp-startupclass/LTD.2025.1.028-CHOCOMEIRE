@@ -1,12 +1,19 @@
+import os
 from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from argon2 import PasswordHasher
 
+# Configuração da aplicação
 app = Flask(__name__)
 app.secret_key = 'sua_chave_secreta'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///instance/site.db'
+
+# Definição do caminho absoluto para o banco de dados
+basedir = os.path.abspath(os.path.dirname(__file__))
+app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{os.path.join(basedir, 'instance', 'site.db')}"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+# Inicialização do banco de dados
 db = SQLAlchemy(app)
 ph = PasswordHasher()
 
@@ -67,5 +74,8 @@ def cadastro():
 
 if __name__ == '__main__':
     with app.app_context():
+        # Garantindo que a pasta instance exista antes de criar o banco
+        os.makedirs(os.path.join(basedir, 'instance'), exist_ok=True)
+        
         db.create_all()
     app.run(debug=True)

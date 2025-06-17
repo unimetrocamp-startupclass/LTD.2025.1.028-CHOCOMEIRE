@@ -1,13 +1,14 @@
-# Código integrado para sistema de e-commerce de docinhos em Flask
-from flask import Flask, render_template, request, redirect, url_for, session, jsonify, flash
+from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
+from argon2 import PasswordHasher
 
 app = Flask(__name__)
-app.secret_key = 'sua_chave_secreta'  # Necessário para usar sessão!
+app.secret_key = 'sua_chave_secreta'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///instance/site.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+ph = PasswordHasher()
 
 # Modelo de Usuário
 class User(db.Model):
@@ -16,133 +17,9 @@ class User(db.Model):
     email = db.Column(db.String(100), unique=True, nullable=False)
     senha = db.Column(db.String(200), nullable=False)
 
-SABORES_LISTA = [
-    'Brigadeiro', 'Brigadeiro Branco', 'Beijinho', 'Paçoquinha',
-    'Moranguinho', 'Limão',
-    'Casadinho (brigadeiro branco e tradicional)',
-    'Sensação (brigadeiro tradicional e moranguinho)'
-]
-
-# Sabores para bombons
-SABORES_BOMBOM_OUTROS = ['Branco', 'Meio Amargo', 'Licor', 'Crocante', 'Amendoim']
-
-PRODUTOS = [
-    {
-        'id': 'cento',
-        'nome': 'Docinhos Tradicionais (Cento - 100uni.)',
-        'descricao': 'Cento (até 3 sabores)',
-        'preco': 110.00,
-        'imagem': 'docinhos1.png',
-        'sabores': SABORES_LISTA,
-        'limite_sabores': 3
-    },
-    {
-        'id': 'meio_cento',
-        'nome': 'Docinhos Tradicionais (Meio Cento - 50uni.)',
-        'descricao': 'Meio Cento (até 2 sabores)',
-        'preco': 65.00,
-        'imagem': 'docinhos1.png',
-        'sabores': SABORES_LISTA,
-        'limite_sabores': 2
-    },
-    {
-        'id': 'bombom_ao_leite',
-        'nome': 'Bombom Ao Leite (Saquinho 12un)',
-        'descricao': 'Bombom ao leite',
-        'preco': 30.00,
-        'imagem': 'bombons.png',
-        'sabores': ['Ao leite'],
-        'limite_sabores': 1
-    },
-    {
-        'id': 'bombom_outros',
-        'nome': 'Bombom Outros Sabores (Saquinho 12un)',
-        'descricao': 'Bombom outros sabores',
-        'preco': 36.00,
-        'imagem': 'bombons.png',
-        'sabores': SABORES_BOMBOM_OUTROS,
-        'limite_sabores': 1
-    }
-]
-
 @app.route('/')
 def home():
     return render_template('index.html')
-
-@app.route('/produtos')
-def produtos():
-    return render_template('produtos.html', produtos=PRODUTOS)
-
-@app.route('/add_to_cart', methods=['POST'])
-def add_to_cart():
-    data = request.get_json()
-    product_id = data.get('product_id')
-    if product_id:
-        cart = session.get('cart', {})
-        cart[product_id] = cart.get(product_id, 0) + 1
-        session['cart'] = cart
-        sabores = session.get('sabores', {})
-        if product_id not in sabores:
-            sabores[product_id] = []
-        session['sabores'] = sabores
-    return jsonify({'success': True, 'cart': session.get('cart', {})})
-
-@app.route('/remove_from_cart', methods=['POST'])
-def remove_from_cart():
-    data = request.get_json()
-    product_id = data.get('product_id')
-    cart = session.get('cart', {})
-    if product_id and product_id in cart:
-        cart[product_id] -= 1
-        if cart[product_id] <= 0:
-            del cart[product_id]
-            sabores = session.get('sabores', {})
-            if product_id in sabores:
-                del sabores[product_id]
-            session['sabores'] = sabores
-        session['cart'] = cart
-    return jsonify({'success': True, 'cart': session.get('cart', {})})
-
-@app.route('/carrinho')
-def carrinho():
-    cart = session.get('cart', {})
-    sabores_selecionados = session.get('sabores', {})
-    items = []
-    total = 0.0
-    for p in PRODUTOS:
-        pid = p['id']
-        if pid in cart:
-            quantidade = cart[pid]
-            subtotal = quantidade * p['preco']
-            total += subtotal
-            items.append({
-                'id': pid,
-                'nome': p['nome'],
-                'imagem': p['imagem'],
-                'quantidade': quantidade,
-                'preco': p['preco'],
-                'sabores': p['sabores'],
-                'subtotal': subtotal,
-                'limite_sabores': p['limite_sabores'],
-                'sabores_escolhidos': sabores_selecionados.get(pid, [])
-            })
-    return render_template('carrinho.html', carrinho=items, total=total)
-
-@app.route('/atualizar_sabores', methods=['POST'])
-def atualizar_sabores():
-    cart = session.get('cart', {})
-    sabores = session.get('sabores', {})
-    for p in PRODUTOS:
-        pid = p['id']
-        sabores_escolhidos = []
-        for idx, sabor in enumerate(p['sabores']):
-            key = f"sabores_{pid}_{idx}"
-            if request.form.get(key):
-                sabores_escolhidos.append(sabor)
-        limite = p['limite_sabores']
-        sabores[pid] = sabores_escolhidos[:limite]
-    session['sabores'] = sabores
-    return redirect(url_for('carrinho'))
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -150,26 +27,42 @@ def login():
         email = request.form['email']
         senha = request.form['senha']
         usuario = User.query.filter_by(email=email).first()
+        
         if usuario and check_password_hash(usuario.senha, senha):
             flash("Login bem-sucedido!", "success")
             return redirect(url_for('home'))
         else:
             flash("Email ou senha inválidos!", "error")
             return redirect(url_for('login'))
+    
     return render_template('login.html')
 
 @app.route('/cadastro', methods=['GET', 'POST'])
 def cadastro():
     if request.method == 'POST':
-        nome = request.form['nome']
-        email = request.form['email']
-        senha = request.form['senha']
-        senha_hash = generate_password_hash(senha)
+        nome = request.form.get('nome')
+        email = request.form.get('email')
+        senha = request.form.get('senha')
+        
+        # Validação dos campos
+        if not nome or not email or not senha:
+            flash("Todos os campos devem ser preenchidos!", "error")
+            return redirect(url_for('cadastro'))
+        
+        # Verificação de email duplicado
+        if User.query.filter_by(email=email).first():
+            flash("Email já cadastrado!", "error")
+            return redirect(url_for('cadastro'))
+
+        # Hash seguro da senha
+        senha_hash = ph.hash(senha)
         novo_usuario = User(nome=nome, email=email, senha=senha_hash)
         db.session.add(novo_usuario)
         db.session.commit()
+
         flash("Cadastro realizado com sucesso!", "success")
         return redirect(url_for('home'))
+    
     return render_template('cadastro.html')
 
 if __name__ == '__main__':

@@ -83,6 +83,10 @@ def cadastro():
     
     return render_template('cadastro.html')
 
+@app.route('/produtos')
+def produtos():
+    return render_template('produtos.html')
+
 if __name__ == '__main__':
     with app.app_context():
         # Garantindo que a pasta instance exista antes de criar o banco

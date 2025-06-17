@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request, redirect, url_for, session, jsonify
+# Código integrado para sistema de e-commerce de docinhos em Flask
+from flask import Flask, render_template, request, redirect, url_for, session, jsonify, flash
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -8,7 +9,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///instance/site.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
-# Modelo de User
+# Modelo de Usuário
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(100), nullable=False)
@@ -70,7 +71,6 @@ def home():
 
 @app.route('/produtos')
 def produtos():
-    # Mostra todos os produtos cadastrados
     return render_template('produtos.html', produtos=PRODUTOS)
 
 @app.route('/add_to_cart', methods=['POST'])
@@ -81,7 +81,6 @@ def add_to_cart():
         cart = session.get('cart', {})
         cart[product_id] = cart.get(product_id, 0) + 1
         session['cart'] = cart
-        # Limpa sabores escolhidos para novo item
         sabores = session.get('sabores', {})
         if product_id not in sabores:
             sabores[product_id] = []
@@ -97,7 +96,6 @@ def remove_from_cart():
         cart[product_id] -= 1
         if cart[product_id] <= 0:
             del cart[product_id]
-            # Remove sabores associados ao produto
             sabores = session.get('sabores', {})
             if product_id in sabores:
                 del sabores[product_id]
@@ -141,7 +139,6 @@ def atualizar_sabores():
             key = f"sabores_{pid}_{idx}"
             if request.form.get(key):
                 sabores_escolhidos.append(sabor)
-        # Limita no servidor também (segurança extra)
         limite = p['limite_sabores']
         sabores[pid] = sabores_escolhidos[:limite]
     session['sabores'] = sabores
@@ -154,10 +151,10 @@ def login():
         senha = request.form['senha']
         usuario = User.query.filter_by(email=email).first()
         if usuario and check_password_hash(usuario.senha, senha):
-            print(f"Login bem-sucedido com email: {email}")
+            flash("Login bem-sucedido!", "success")
             return redirect(url_for('home'))
         else:
-            print("Falha no login: email ou senha incorretos")
+            flash("Email ou senha inválidos!", "error")
             return redirect(url_for('login'))
     return render_template('login.html')
 
@@ -171,9 +168,11 @@ def cadastro():
         novo_usuario = User(nome=nome, email=email, senha=senha_hash)
         db.session.add(novo_usuario)
         db.session.commit()
-        print(f"Novo cadastro: {nome}, {email}")
+        flash("Cadastro realizado com sucesso!", "success")
         return redirect(url_for('home'))
     return render_template('cadastro.html')
 
 if __name__ == '__main__':
+    with app.app_context():
+        db.create_all()
     app.run(debug=True)

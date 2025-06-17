@@ -73,7 +73,7 @@ def cadastro():
             return redirect(url_for('cadastro'))
 
         # Hash seguro da senha
-        senha_hash = ph.hash(senha)
+        senha_hash = generate_password_hash(senha)
         novo_usuario = User(nome=nome, email=email, senha=senha_hash)
         db.session.add(novo_usuario)
         db.session.commit()

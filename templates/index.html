@@ -2,6 +2,16 @@
 
 {% block content %}
 <div class="container text-center mt-5">
+    {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+            <div class="alert alert-success">
+                {% for category, message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
     <h1>Bem-vindo à Chocomeire!</h1>
     <p class="lead">Gerencie suas encomendas de doces com praticidade e sabor.</p>
     <img src="{{ url_for('static', filename='doces.home.png') }}" alt="Doces Chocomeire" class="img-fluid my-4">

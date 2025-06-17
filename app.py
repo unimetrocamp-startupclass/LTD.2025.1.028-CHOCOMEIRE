@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify
+from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify, get_flashed_messages
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from argon2 import PasswordHasher
@@ -26,7 +26,8 @@ class User(db.Model):
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    messages = get_flashed_messages(with_categories=True)
+    return render_template('index.html', messages=messages)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():

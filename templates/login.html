@@ -7,6 +7,7 @@ def login():
         # Verificando se o usuário existe no banco de dados
         usuario = User.query.filter_by(email=email).first()
 
+
         # Validando senha com check_password_hash()
         if usuario and check_password_hash(usuario.senha, senha):
             session['usuario_id'] = usuario.id  # Armazena o ID na sessão

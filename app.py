@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request, redirect, url_for, session, flash, get_flashed_messages
+from flask import Flask, render_template, request, redirect, url_for, session, flash
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -19,7 +19,6 @@ class User(db.Model):
     email = db.Column(db.String(100), unique=True, nullable=False)
     senha = db.Column(db.String(200), nullable=False)
 
-# Função auxiliar para obter o usuário logado
 def get_usuario_logado():
     if 'usuario_id' in session:
         return User.query.get(session['usuario_id'])
@@ -36,7 +35,7 @@ def login():
         email = request.form.get('email')
         senha = request.form.get('senha')
         usuario = User.query.filter_by(email=email).first()
-        
+
         if usuario and check_password_hash(usuario.senha, senha):
             session['usuario_id'] = usuario.id
             flash("Login bem-sucedido!", "success")

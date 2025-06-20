@@ -1,20 +1,18 @@
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    if request.method == 'POST':
-        email = request.form.get('email')
-        senha = request.form.get('senha')
+{% extends 'base.html' %}
 
-        # Verificando se o usuário existe no banco de dados
-        usuario = User.query.filter_by(email=email).first()
-
-
-        # Validando senha com check_password_hash()
-        if usuario and check_password_hash(usuario.senha, senha):
-            session['usuario_id'] = usuario.id  # Armazena o ID na sessão
-            flash("Login bem-sucedido!", "success")
-            return redirect(url_for('home'))
-        else:
-            flash("Email ou senha inválidos!", "error")
-            return redirect(url_for('login'))
-
-    return render_template('login.html')
+{% block content %}
+<div class="container text-center mt-5">
+    <h2>Login</h2>
+    <form method="POST" action="/login">
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <div class="mb-3">
+            <label for="senha" class="form-label">Senha</label>
+            <input type="password" class="form-control" id="senha" name="senha" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Entrar</button>
+    </form>
+</div>
+{% endblock %}

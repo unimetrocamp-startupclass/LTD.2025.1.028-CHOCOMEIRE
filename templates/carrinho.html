@@ -57,30 +57,30 @@
 {% block scripts %}
 <script>
 document.addEventListener("DOMContentLoaded", function () {
+    if (sessionStorage.getItem("carrinho_enviado") === "sim") {
+        sessionStorage.removeItem("carrinho_enviado");
+        return;
+    }
+
     const carrinho = JSON.parse(sessionStorage.getItem("carrinho") || "{}");
 
-    // Se estiver vazio, não faz requisição
     if (Object.keys(carrinho).length === 0) return;
 
     fetch("/carrinho", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ carrinho: carrinho })
-    })
-    .then(response => response.text())
-    .then(html => {
-        document.open();
-        document.write(html);
-        document.close();
+    }).then(() => {
+        sessionStorage.setItem("carrinho_enviado", "sim");
+        window.location.reload();
     });
 
-    // Valida limite de sabores por item
     document.querySelectorAll('.sabores-selecao').forEach(function(box) {
-        let limite = parseInt(box.getAttribute('data-limite'), 10);
-        let checkboxes = box.querySelectorAll('.check-sabor');
+        const limite = parseInt(box.getAttribute('data-limite'), 10);
+        const checkboxes = box.querySelectorAll('.check-sabor');
         checkboxes.forEach(function(chk) {
-            chk.addEventListener('change', function() {
-                let selecionados = box.querySelectorAll('.check-sabor:checked').length;
+            chk.addEventListener('change', function () {
+                const selecionados = box.querySelectorAll('.check-sabor:checked').length;
                 if (selecionados > limite) {
                     chk.checked = false;
                     alert("Você só pode escolher até " + limite + " sabores.");

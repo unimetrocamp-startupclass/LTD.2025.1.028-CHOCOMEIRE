@@ -22,7 +22,7 @@ class User(db.Model):
     nome = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
     senha = db.Column(db.String(200), nullable=False)
-    is_admin = db.Column(db.Boolean, default=False)  # 👈 Adiciona esta linha
+    is_admin = db.Column(db.Boolean, default=False)
 
 def get_usuario_logado():
     if 'usuario_id' in session:
@@ -31,7 +31,7 @@ def get_usuario_logado():
 
 def is_admin():
     usuario = get_usuario_logado()
-    return usuario and usuario.email == "admin@chocomeire.com"
+    return usuario and getattr(usuario, "is_admin", False)
 
 @app.route('/')
 def home():
@@ -197,6 +197,20 @@ def admin_detalhes_pedido(pedido_id):
 
     total = sum(p['subtotal'] for p in produtos)
     return render_template("admin_pedido.html", pedido=pedido, cliente=cliente, produtos=produtos, total=total)
+
+@app.route('/admin/pedido/<int:pedido_id>/atualizar-status', methods=['POST'])
+def atualizar_status_pedido(pedido_id):
+    if not is_admin():
+        flash("Acesso restrito ao administrador!", "error")
+        return redirect(url_for('home'))
+
+    novo_status = request.form.get("status")
+    pedido = Pedido.query.get_or_404(pedido_id)
+    pedido.status = novo_status
+    db.session.commit()
+
+    flash("Status do pedido atualizado!", "success")
+    return redirect(url_for('admin_detalhes_pedido', pedido_id=pedido.id))
 
 if __name__ == '__main__':
     with app.app_context():

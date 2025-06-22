@@ -6,7 +6,18 @@
   <p><strong>Cliente:</strong> {{ cliente.nome }}</p>
   <p><strong>Email:</strong> {{ cliente.email }}</p>
   <p><strong>Data:</strong> {{ pedido.data_criacao.strftime('%d/%m/%Y %H:%M') if pedido.data_criacao else '—' }}</p>
-  <p><strong>Status:</strong> {{ pedido.status if pedido.status else 'Pendente' }}</p>
+
+  <form method="POST" action="{{ url_for('atualizar_status_pedido', pedido_id=pedido.id) }}" class="mb-3">
+    <label><strong>Status:</strong></label>
+    <div class="input-group mt-1">
+      <select name="status" class="form-select" required>
+        <option value="Pendente" {% if pedido.status == 'Pendente' %}selected{% endif %}>Pendente</option>
+        <option value="Em preparo" {% if pedido.status == 'Em preparo' %}selected{% endif %}>Em preparo</option>
+        <option value="Entregue" {% if pedido.status == 'Entregue' %}selected{% endif %}>Entregue</option>
+      </select>
+      <button type="submit" class="btn btn-outline-primary">Atualizar</button>
+    </div>
+  </form>
 
   <h4 class="mt-4">Itens:</h4>
   <table class="table table-bordered">

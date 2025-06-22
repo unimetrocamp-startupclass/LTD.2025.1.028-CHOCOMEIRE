@@ -9,7 +9,7 @@ from models.pedido import Pedido, ItemPedido
 
 # Configuração do app
 app = Flask(__name__)
-app.secret_key = 'sua_chave_secreta'  # Troque por algo seguro em produção
+app.secret_key = 'sua_chave_secreta'
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{os.path.join(basedir, 'instance', 'site.db')}"
@@ -18,20 +18,18 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # Inicializa o banco com o app
 db.init_app(app)
 
-# Modelo local (User)
+# Modelo local
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
     senha = db.Column(db.String(200), nullable=False)
 
-# Função auxiliar
 def get_usuario_logado():
     if 'usuario_id' in session:
         return User.query.get(session['usuario_id'])
     return None
 
-# Rotas
 @app.route('/')
 def home():
     usuario = get_usuario_logado()
@@ -116,15 +114,19 @@ def carrinho():
                 'preco': produto.preco,
                 'quantidade': qtd,
                 'subtotal': subtotal,
-                'sabores': [
-                    "Brigadeiro", "Beijinho", "Moranguinho", "Limão", "Paçoquinha"
-                ],
+                'sabores': ["Brigadeiro", "Beijinho", "Moranguinho", "Limão", "Paçoquinha"],
                 'limite_sabores': 3 if "cento" in produto.nome.lower() else 2,
                 'sabores_escolhidos': []
             })
             total += subtotal
 
     return render_template("carrinho.html", usuario=usuario, carrinho=itens, total=total)
+
+@app.route('/sincronizar-carrinho', methods=['POST'])
+def sincronizar_carrinho():
+    data = request.get_json()
+    session['carrinho'] = data.get('carrinho', {})
+    return jsonify({"status": "ok"})
 
 @app.route('/finalizar-pedido', methods=['GET', 'POST'])
 def finalizar_pedido():
@@ -161,7 +163,6 @@ def finalizar_pedido():
     usuario = get_usuario_logado()
     return render_template('checkout.html', usuario=usuario)
 
-# Inicialização
 if __name__ == '__main__':
     with app.app_context():
         os.makedirs(os.path.join(basedir, 'instance'), exist_ok=True)

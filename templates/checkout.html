@@ -16,3 +16,30 @@
     </form>
 </div>
 {% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector("form");
+
+    form.addEventListener("submit", function (e) {
+        e.preventDefault(); // Interrompe envio
+
+        const carrinho = JSON.parse(sessionStorage.getItem("carrinho") || "{}");
+
+        fetch("/sincronizar-carrinho", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ carrinho: carrinho })
+        })
+        .then(response => response.json())
+        .then(() => {
+            form.submit(); // Reenvia o formulário manualmente
+        })
+        .catch(() => {
+            alert("Erro ao sincronizar o carrinho.");
+        });
+    });
+});
+</script>
+{% endblock %}

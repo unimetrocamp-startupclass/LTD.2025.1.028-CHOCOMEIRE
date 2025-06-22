@@ -1,10 +1,11 @@
-from models import db  # Importa a instância global de db
+from models import db
 
 class Produto(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(100), nullable=False)
     preco = db.Column(db.Float, nullable=False)
     estoque = db.Column(db.Integer, nullable=False)
+    imagem = db.Column(db.String(200), nullable=True)
 
     def atualizar_preco(self, novo_preco: float) -> bool:
         if novo_preco < 0:
@@ -21,4 +22,4 @@ class Produto(db.Model):
         return True
 
     def __repr__(self):
-        return f'<Produto {self.nome} - Preço: R${self.preco:.2f} - Estoque: {self.estoque}>'
+        return f'<Produto {self.nome} - R${self.preco:.2f} - Estoque: {self.estoque}>'

@@ -1,100 +1,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container text-center mt-5">
-    {% with messages = get_flashed_messages(with_categories=True) %}
-        {% if messages %}
-            {% for category, message in messages %}
-                <div class="alert alert-{{ 'success' if category == 'success' else 'danger' }}">
-                    <p>{{ message }}</p>
-                </div>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
 
-    <h2 class="titulo-centralizado">Produtos</h2>
-
-    <div class="produtos-lista">
-        <!-- Produto 1 -->
-        <div class="produto-card-grande">
-            <div class="produto-info-grande">
-                <span class="tag-produto">Docinhos Tradicionais</span>
-                <h3>Cento - 100uni. ou Meio Cento - 50uni.</h3>
-                <ul class="sabores-lista">
-                    <li>Brigadeiro</li>
-                    <li>Brigadeiro Branco</li>
-                    <li>Beijinho</li>
-                    <li>Paçoquinha</li>
-                    <li>Moranguinho</li>
-                    <li>Limão</li>
-                    <li>Casadinho (brigadeiro branco e tradicional)</li>
-                    <li>Sensação (brigadeiro tradicional e moranguinho)</li>
-                </ul>
-                <div class="precos-produto">
-                    <div>
-                        <b>Cento</b> (100unid.) (até 3 sabores): 
-                        <span class="preco-cento">R$110,00</span>
-                        <button class="btn-menor btn-menor-esquerda" onclick="removeFromCart('cento')" title="Remover Cento">−</button>
-                        <button class="btn-menor btn-menor-direita" onclick="addToCart('cento')" title="Adicionar Cento">+</button>
-                    </div>
-                    <div style="margin-top:8px;">
-                        <b>Meio Cento</b> (50unid.) (até 2 sabores): 
-                        <span class="preco-meio-cento">R$65,00</span>
-                        <button class="btn-menor btn-menor-esquerda" onclick="removeFromCart('meio_cento')" title="Remover Meio Cento">−</button>
-                        <button class="btn-menor btn-menor-direita" onclick="addToCart('meio_cento')" title="Adicionar Meio Cento">+</button>
-                    </div>
-                </div>
-            </div>
-            <div class="imagem-e-botoes-centralizada">
-                <img src="{{ url_for('static', filename='docinhos1.png') }}" alt="Docinhos" class="imagem-produto-grande">
-            </div>
+<div class="produtos-lista">
+  {% for produto in produtos %}
+    <div class="produto-card-grande">
+      <div class="produto-info-grande">
+        <span class="tag-produto">Produto</span>
+        <h3>{{ produto.nome }}</h3>
+        <p>Preço: R$ {{ "%.2f"|format(produto.preco) }}</p>
+        <p>Em estoque: {{ produto.estoque }}</p>
+        <button class="btn-menor" onclick="removeFromCart('{{ produto.id }}')">−</button>
+        <button class="btn-menor" onclick="addToCart('{{ produto.id }}')">+</button>
+      </div>
+      {% if produto.imagem %}
+        <div class="imagem-e-botoes-centralizada">
+          <img src="{{ url_for('static', filename=produto.imagem) }}" alt="{{ produto.nome }}" class="imagem-produto-grande">
         </div>
-
-        <!-- Produto 2 -->
-        <div class="produto-card-grande">
-            <div class="produto-info-grande">
-                <span class="tag-produto">Bombons</span>
-                <h3>Saquinho com 12 un</h3>
-                <div class="sabores-bombom-bloco">
-                    <div class="linha-sabor">
-                        <span class="sabor-nome">Ao leite</span>
-                        <span class="sabor-preco">- R$ 30,00</span>
-                        <button class="btn-menor btn-menor-esquerda" onclick="removeFromCart('bombom_ao_leite')" title="Remover Bombom Ao Leite">−</button>
-                        <button class="btn-menor btn-menor-direita" onclick="addToCart('bombom_ao_leite')" title="Adicionar Bombom Ao Leite">+</button>
-                    </div>
-                    <div class="linha-divisoria"></div>
-                    <div class="linha-sabor outros-sabores">
-                        <div>
-                            <div class="sabor-nome">Branco</div>
-                            <div class="sabor-nome">Meio Amargo</div>
-                            <div class="sabor-nome">Licor</div>
-                            <div class="sabor-nome">Crocante</div>
-                            <div class="sabor-nome">Amendoim</div>
-                        </div>
-                        <div class="colchete-preco" style="margin-left: 12px;">
-                            <span class="preco">R$ 36,00</span>
-                            <div style="margin-top: 4px;">
-                                <button class="btn-menor btn-menor-esquerda" onclick="removeFromCart('bombom_outros')" title="Remover Bombons Outros Sabores">−</button>
-                                <button class="btn-menor btn-menor-direita" onclick="addToCart('bombom_outros')" title="Adicionar Bombons Outros Sabores">+</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="imagem-e-botoes-centralizada">
-                    <img src="{{ url_for('static', filename='imagem.bombom.jpg') }}" alt="Bombons" class="imagem-produto-grande">
-                </div>
-            </div>
-        </div>
+      {% endif %}
     </div>
-
-    <!-- Botão flutuante Ver Carrinho estilizado -->
-    <a href="{{ url_for('carrinho') }}" class="carrinho-link-produtos" id="cart-fab">
-        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24">
-            <path d="M6 6h15l-1.5 9.5a2 2 0 0 1-2 1.5H8.5a2 2 0 0 1-2-1.5L5 5H2" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <circle cx="9" cy="20" r="1.5" fill="#fff"/>
-            <circle cx="18" cy="20" r="1.5" fill="#fff"/>
-        </svg>
-        Ver carrinho (<span id="cart-qty">0</span>)
-    </a>
+  {% endfor %}
 </div>
-{% endblock %}

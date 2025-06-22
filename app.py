@@ -3,8 +3,7 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from models.produto import Produto  # IMPORTANTE
-
+# Configuração do app
 app = Flask(__name__)
 app.secret_key = 'sua_chave_secreta'
 
@@ -12,20 +11,30 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{os.path.join(basedir, 'instance', 'site.db')}"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+# Banco de dados
 db = SQLAlchemy(app)
 
-# Modelo de Usuário
+# Modelos
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
     senha = db.Column(db.String(200), nullable=False)
 
+class Produto(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nome = db.Column(db.String(100), nullable=False)
+    preco = db.Column(db.Float, nullable=False)
+    estoque = db.Column(db.Integer, nullable=False)
+    imagem = db.Column(db.String(200), nullable=True)
+
+# Auxiliar
 def get_usuario_logado():
     if 'usuario_id' in session:
         return User.query.get(session['usuario_id'])
     return None
 
+# Rotas
 @app.route('/')
 def home():
     usuario = get_usuario_logado()
@@ -77,7 +86,7 @@ def cadastro():
 
         flash("Cadastro realizado com sucesso!", "success")
         return redirect(url_for('home'))
-    
+
     usuario = get_usuario_logado()
     return render_template('cadastro.html', usuario=usuario)
 
@@ -92,6 +101,7 @@ def carrinho():
     usuario = get_usuario_logado()
     return render_template('carrinho.html', usuario=usuario)
 
+# Inicialização
 if __name__ == '__main__':
     with app.app_context():
         os.makedirs(os.path.join(basedir, 'instance'), exist_ok=True)

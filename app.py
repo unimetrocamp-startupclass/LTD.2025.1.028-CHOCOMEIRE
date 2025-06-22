@@ -7,7 +7,6 @@ from models.produto import Produto
 from models.cliente import Cliente
 from models.pedido import Pedido, ItemPedido
 
-# Configuração do app
 app = Flask(__name__)
 app.secret_key = 'sua_chave_secreta'
 
@@ -15,7 +14,6 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{os.path.join(basedir, 'instance', 'site.db')}"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-# Inicializa o banco com o app
 db.init_app(app)
 
 # Modelo local
@@ -29,6 +27,10 @@ def get_usuario_logado():
     if 'usuario_id' in session:
         return User.query.get(session['usuario_id'])
     return None
+
+def is_admin():
+    usuario = get_usuario_logado()
+    return usuario and usuario.email == "admin@chocomeire.com"
 
 @app.route('/')
 def home():
@@ -162,6 +164,38 @@ def finalizar_pedido():
 
     usuario = get_usuario_logado()
     return render_template('checkout.html', usuario=usuario)
+
+@app.route('/admin')
+def admin_dashboard():
+    if not is_admin():
+        flash("Acesso restrito ao administrador!", "error")
+        return redirect(url_for('home'))
+
+    pedidos = Pedido.query.order_by(Pedido.id.desc()).all()
+    return render_template("admin.html", usuario=get_usuario_logado(), pedidos=pedidos)
+
+@app.route('/admin/pedido/<int:pedido_id>')
+def admin_detalhes_pedido(pedido_id):
+    if not is_admin():
+        flash("Acesso restrito ao administrador!", "error")
+        return redirect(url_for('home'))
+
+    pedido = Pedido.query.get_or_404(pedido_id)
+    cliente = pedido.cliente
+    itens = ItemPedido.query.filter_by(pedido_id=pedido.id).all()
+    produtos = []
+
+    for item in itens:
+        produto = Produto.query.get(item.produto_id)
+        produtos.append({
+            'nome': produto.nome,
+            'quantidade': item.quantidade,
+            'preco_unitario': produto.preco,
+            'subtotal': item.quantidade * produto.preco
+        })
+
+    total = sum(p['subtotal'] for p in produtos)
+    return render_template("admin_pedido.html", pedido=pedido, cliente=cliente, produtos=produtos, total=total)
 
 if __name__ == '__main__':
     with app.app_context():

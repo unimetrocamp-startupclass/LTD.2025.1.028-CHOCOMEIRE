@@ -4,10 +4,12 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 from models import db
 from models.produto import Produto
+from models.cliente import Cliente
+from models.pedido import Pedido, ItemPedido
 
 # Configuração do app
 app = Flask(__name__)
-app.secret_key = 'sua_chave_secreta'
+app.secret_key = 'sua_chave_secreta'  # Troque por algo seguro em produção
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{os.path.join(basedir, 'instance', 'site.db')}"
@@ -95,6 +97,41 @@ def produtos():
 def carrinho():
     usuario = get_usuario_logado()
     return render_template('carrinho.html', usuario=usuario)
+
+@app.route('/finalizar-pedido', methods=['GET', 'POST'])
+def finalizar_pedido():
+    if request.method == 'POST':
+        nome = request.form.get('nome')
+        email = request.form.get('email')
+        carrinho = session.get('carrinho', {})
+
+        if not carrinho:
+            flash("Seu carrinho está vazio!", "error")
+            return redirect(url_for('produtos'))
+
+        cliente = Cliente.query.filter_by(email=email).first()
+        if not cliente:
+            cliente = Cliente(nome=nome, email=email)
+            db.session.add(cliente)
+            db.session.commit()
+
+        pedido = Pedido(cliente_id=cliente.id)
+        db.session.add(pedido)
+        db.session.commit()
+
+        for produto_id_str, qtd in carrinho.items():
+            produto_id = int(produto_id_str)
+            item = ItemPedido(produto_id=produto_id, pedido_id=pedido.id, quantidade=qtd)
+            db.session.add(item)
+
+        db.session.commit()
+        session['carrinho'] = {}
+
+        flash("Pedido realizado com sucesso! 🎉", "success")
+        return redirect(url_for('home'))
+
+    usuario = get_usuario_logado()
+    return render_template('checkout.html', usuario=usuario)
 
 # Inicialização
 if __name__ == '__main__':

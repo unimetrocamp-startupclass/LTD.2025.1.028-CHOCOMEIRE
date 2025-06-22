@@ -45,3 +45,40 @@
     </a>
 </div>
 {% endblock %}
+
+{% block scripts %}
+<script>
+    // Inicializa carrinho se necessário
+    if (!sessionStorage.getItem('carrinho')) {
+        sessionStorage.setItem('carrinho', JSON.stringify({}));
+    }
+
+    function updateCartQtyDisplay() {
+        const carrinho = JSON.parse(sessionStorage.getItem('carrinho'));
+        const total = Object.values(carrinho).reduce((sum, qtd) => sum + qtd, 0);
+        document.getElementById('cart-qty').textContent = total;
+    }
+
+    function addToCart(produtoId) {
+        const carrinho = JSON.parse(sessionStorage.getItem('carrinho'));
+        carrinho[produtoId] = (carrinho[produtoId] || 0) + 1;
+        sessionStorage.setItem('carrinho', JSON.stringify(carrinho));
+        updateCartQtyDisplay();
+    }
+
+    function removeFromCart(produtoId) {
+        const carrinho = JSON.parse(sessionStorage.getItem('carrinho'));
+        if (carrinho[produtoId]) {
+            carrinho[produtoId]--;
+            if (carrinho[produtoId] <= 0) {
+                delete carrinho[produtoId];
+            }
+            sessionStorage.setItem('carrinho', JSON.stringify(carrinho));
+            updateCartQtyDisplay();
+        }
+    }
+
+    // Atualiza contador ao carregar página
+    updateCartQtyDisplay();
+</script>
+{% endblock %}

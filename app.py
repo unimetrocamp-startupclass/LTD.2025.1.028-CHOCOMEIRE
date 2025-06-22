@@ -3,6 +3,8 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 
+from models.produto import Produto  # IMPORTANTE
+
 app = Flask(__name__)
 app.secret_key = 'sua_chave_secreta'
 
@@ -82,7 +84,8 @@ def cadastro():
 @app.route('/produtos')
 def produtos():
     usuario = get_usuario_logado()
-    return render_template('produtos.html', usuario=usuario)
+    produtos = Produto.query.all()
+    return render_template('produtos.html', usuario=usuario, produtos=produtos)
 
 @app.route('/carrinho')
 def carrinho():

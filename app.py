@@ -22,6 +22,7 @@ class User(db.Model):
     nome = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
     senha = db.Column(db.String(200), nullable=False)
+    is_admin = db.Column(db.Boolean, default=False)  # 👈 Adiciona esta linha
 
 def get_usuario_logado():
     if 'usuario_id' in session:

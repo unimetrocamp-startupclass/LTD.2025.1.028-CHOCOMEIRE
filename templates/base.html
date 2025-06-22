@@ -24,8 +24,18 @@
                     <li class="nav-item"><a class="nav-link" href="/produtos">Produtos</a></li>
 
                     {% if usuario %}
+                        {% if usuario.is_admin %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url_for('admin_dashboard') }}">Painel Admin</a>
+                            </li>
+                        {% endif %}
                         <li class="nav-item">
-                            <a class="nav-link disabled">Olá, {{ usuario.nome }}</a>
+                            <a class="nav-link disabled">
+                                Olá, {{ usuario.nome }}
+                                {% if usuario.is_admin %}
+                                    <span class="badge bg-warning text-dark ms-2">Administrador</span>
+                                {% endif %}
+                            </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/logout">Sair</a>
@@ -56,7 +66,6 @@
 
     <!-- Scripts padrão -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
     {% block scripts %}{% endblock %}
 </body>
 </html>

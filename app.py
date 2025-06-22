@@ -1,7 +1,9 @@
 import os
 from flask import Flask, render_template, request, redirect, url_for, session, flash
-from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
+
+from models import db
+from models.produto import Produto
 
 # Configuração do app
 app = Flask(__name__)
@@ -11,24 +13,17 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{os.path.join(basedir, 'instance', 'site.db')}"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-# Banco de dados
-db = SQLAlchemy(app)
+# Inicializa o banco com o app
+db.init_app(app)
 
-# Modelos
+# Modelo local (User)
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
     senha = db.Column(db.String(200), nullable=False)
 
-class Produto(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    nome = db.Column(db.String(100), nullable=False)
-    preco = db.Column(db.Float, nullable=False)
-    estoque = db.Column(db.Integer, nullable=False)
-    imagem = db.Column(db.String(200), nullable=True)
-
-# Auxiliar
+# Função auxiliar
 def get_usuario_logado():
     if 'usuario_id' in session:
         return User.query.get(session['usuario_id'])

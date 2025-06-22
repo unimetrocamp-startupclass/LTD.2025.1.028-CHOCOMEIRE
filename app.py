@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request, redirect, url_for, session, flash
+from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from models import db
@@ -93,10 +93,38 @@ def produtos():
     produtos = Produto.query.all()
     return render_template('produtos.html', usuario=usuario, produtos=produtos)
 
-@app.route('/carrinho')
+@app.route('/carrinho', methods=['GET', 'POST'])
 def carrinho():
     usuario = get_usuario_logado()
-    return render_template('carrinho.html', usuario=usuario)
+    itens = []
+    total = 0.0
+
+    if request.method == 'POST':
+        data = request.get_json()
+        carrinho_data = data.get("carrinho", {})
+        ids = [int(pid) for pid in carrinho_data.keys()]
+        produtos = Produto.query.filter(Produto.id.in_(ids)).all()
+
+        for produto in produtos:
+            pid = str(produto.id)
+            qtd = carrinho_data.get(pid, 0)
+            subtotal = produto.preco * qtd
+            itens.append({
+                'id': produto.id,
+                'nome': produto.nome,
+                'imagem': produto.imagem,
+                'preco': produto.preco,
+                'quantidade': qtd,
+                'subtotal': subtotal,
+                'sabores': [
+                    "Brigadeiro", "Beijinho", "Moranguinho", "Limão", "Paçoquinha"
+                ],
+                'limite_sabores': 3 if "cento" in produto.nome.lower() else 2,
+                'sabores_escolhidos': []
+            })
+            total += subtotal
+
+    return render_template("carrinho.html", usuario=usuario, carrinho=itens, total=total)
 
 @app.route('/finalizar-pedido', methods=['GET', 'POST'])
 def finalizar_pedido():

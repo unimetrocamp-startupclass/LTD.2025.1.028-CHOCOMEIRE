@@ -250,10 +250,6 @@ Criar um site dinâmico e eficiente para o gerenciamento de encomendas de doces,
 - **PythonAnywhere/**: hospedagem do site
 - **Lucidchart/Draw.io**: Criação dos diagramas
 
-### Arquitetura do Sistema
-(Insira aqui uma imagem da arquitetura e descrição do fluxo de dados)
-
----
 
 ## 7. Resultados 📈
 

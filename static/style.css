@@ -370,3 +370,26 @@ body {
         height: 110px;
     }
 }
+
+.btn-primary {
+    background-color: #D93846;
+    border-color: #b02534;
+    color: #fff;
+}
+
+.btn-secondary {
+    background-color: #D93846;
+    border-color: #b02534;
+    color: #fff;
+}
+
+/* Efeitos ao passar o mouse */
+.btn-primary:hover {
+    background-color: #b02534;
+    border-color: #891c27;
+}
+
+.btn-secondary:hover {
+    background-color: #b02534;
+    border-color: #891c27;
+}

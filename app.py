@@ -26,7 +26,7 @@ class User(db.Model):
 
 def get_usuario_logado():
     if 'usuario_id' in session:
-        return User.query.get(session['usuario_id'])
+        return db.session.get(User, session['usuario_id'])
     return None
 
 def is_admin():

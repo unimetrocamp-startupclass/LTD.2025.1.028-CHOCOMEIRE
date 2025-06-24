@@ -64,6 +64,21 @@ def logout():
     flash("Logout realizado com sucesso!", "success")
     return redirect(url_for('home'))
 
+@app.route('/meus-pedidos')
+def meus_pedidos():
+    usuario = get_usuario_logado()
+    if not usuario:
+        flash("É necessário estar logado para ver seus pedidos.", "error")
+        return redirect(url_for('login'))
+
+    cliente = Cliente.query.filter_by(email=usuario.email).first()
+    if not cliente:
+        flash("Cliente não encontrado.", "error")
+        return redirect(url_for('home'))
+
+    pedidos = Pedido.query.filter_by(cliente_id=cliente.id).order_by(Pedido.id.desc()).all()
+    return render_template("meus_pedidos.html", usuario=usuario, pedidos=pedidos)
+
 @app.route('/cadastro', methods=['GET', 'POST'])
 def cadastro():
     if request.method == 'POST':

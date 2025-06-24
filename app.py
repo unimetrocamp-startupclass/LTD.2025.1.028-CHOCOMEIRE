@@ -2,6 +2,7 @@ import os
 import json
 from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_migrate import Migrate
 
 from models import db
 from models.produto import Produto
@@ -100,7 +101,7 @@ def carrinho():
 
     if request.method == 'POST':
         try:
-            data = request.get_json()
+            data = request.get_json() or {}
             session['carrinho'] = data.get("carrinho", {})
             session['sabores_selecionados'] = json.dumps(data.get("sabores", {}))
             return jsonify({"status": "ok"})
@@ -108,6 +109,7 @@ def carrinho():
             return jsonify({"status": "erro", "mensagem": str(e)}), 500
 
     carrinho_data = session.get("carrinho", {})
+    sabores_salvos = json.loads(session.get("sabores_selecionados", "{}"))
     ids = [int(pid) for pid in carrinho_data.keys()]
     produtos = Produto.query.filter(Produto.id.in_(ids)).all()
 
@@ -127,7 +129,7 @@ def carrinho():
             'subtotal': subtotal,
             'sabores': ["Brigadeiro", "Beijinho", "Moranguinho", "Limão", "Paçoquinha"],
             'limite_sabores': 3 if "cento" in produto.nome.lower() else 2,
-            'sabores_escolhidos': []
+            'sabores_escolhidos': sabores_salvos.get(pid, [])
         })
         total += subtotal
 
@@ -170,7 +172,12 @@ def finalizar_pedido():
         return redirect(url_for('home'))
 
     usuario = get_usuario_logado()
-    return render_template('checkout.html', usuario=usuario)
+    carrinho = session.get('carrinho', {})
+    sabores = json.loads(session.get("sabores_selecionados", "{}"))
+    produtos = Produto.query.filter(Produto.id.in_([int(pid) for pid in carrinho.keys()])).all()
+    produtos_map = {str(p.id): p for p in produtos}
+
+    return render_template('checkout.html', usuario=usuario, carrinho=carrinho, sabores=sabores, produtos=produtos_map)
 
 @app.route('/admin')
 def admin_dashboard():

@@ -22,7 +22,8 @@
                                name="sabores_{{ item.id }}_{{ loop.index0 }}"
                                value="{{ sabor }}"
                                class="check-sabor"
-                               data-produto="{{ item.id }}">
+                               data-produto="{{ item.id }}"
+                               {% if sabor in item.sabores_escolhidos %}checked{% endif %}>
                         {{ sabor }}
                     </div>
                     {% endfor %}
@@ -81,11 +82,11 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Limite de sabores
-    document.querySelectorAll('.sabores-selecao').forEach(function(box) {
+    // Limite de sabores por produto
+    document.querySelectorAll('.sabores-selecao').forEach(function (box) {
         const limite = parseInt(box.getAttribute('data-limite'), 10);
         const checkboxes = box.querySelectorAll('.check-sabor');
-        checkboxes.forEach(function(chk) {
+        checkboxes.forEach(function (chk) {
             chk.addEventListener('change', function () {
                 const selecionados = box.querySelectorAll('.check-sabor:checked').length;
                 if (selecionados > limite) {
@@ -96,7 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Auto-sincronização inicial (POST carrinho no primeiro acesso)
+    // Auto-sincronização inicial do carrinho
     const carrinho = JSON.parse(sessionStorage.getItem("carrinho") || "{}");
     const carrinhoEnviado = sessionStorage.getItem("carrinho_enviado");
 
@@ -104,7 +105,7 @@ document.addEventListener("DOMContentLoaded", function () {
         fetch("/carrinho", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ carrinho: carrinho })
+            body: JSON.stringify({ carrinho: carrinho, sabores: {} })
         }).then(() => {
             sessionStorage.setItem("carrinho_enviado", "sim");
             window.location.reload();

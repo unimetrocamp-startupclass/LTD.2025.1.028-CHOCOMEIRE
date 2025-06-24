@@ -49,5 +49,12 @@
   </table>
 
   <a href="{{ url_for('admin_dashboard') }}" class="btn btn-secondary mt-3">Voltar</a>
+
+  <form method="POST"
+        action="{{ url_for('excluir_pedido', pedido_id=pedido.id) }}"
+        onsubmit="return confirm('Tem certeza que deseja excluir este pedido?')"
+        class="d-inline">
+    <button type="submit" class="btn btn-danger mt-3 ms-2">Excluir pedido</button>
+  </form>
 </div>
 {% endblock %}

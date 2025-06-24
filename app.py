@@ -227,6 +227,21 @@ def atualizar_status_pedido(pedido_id):
     flash("Status do pedido atualizado!", "success")
     return redirect(url_for('admin_detalhes_pedido', pedido_id=pedido.id))
 
+
+@app.route('/admin/pedido/<int:pedido_id>/excluir', methods=['POST'])
+def excluir_pedido(pedido_id):
+    if not is_admin():
+        flash("Acesso restrito ao administrador!", "error")
+        return redirect(url_for('home'))
+
+    pedido = Pedido.query.get_or_404(pedido_id)
+    db.session.delete(pedido)
+    db.session.commit()
+
+    flash("Pedido excluído com sucesso!", "success")
+    return redirect(url_for('admin_dashboard'))
+
+
 if __name__ == '__main__':
     with app.app_context():
         os.makedirs(os.path.join(basedir, 'instance'), exist_ok=True)

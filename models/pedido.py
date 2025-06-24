@@ -1,13 +1,16 @@
+from datetime import datetime
 from models import db
 
 class Pedido(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     cliente_id = db.Column(db.Integer, db.ForeignKey('cliente.id'), nullable=False)
+    cliente = db.relationship('Cliente', backref='pedidos')  # ✅ relacionamento com cliente
     status = db.Column(db.String(50), default="Pendente")
+    data_criacao = db.Column(db.DateTime, default=datetime.utcnow)  # ✅ campo de data
     itens = db.relationship('ItemPedido', backref='pedido', lazy=True, cascade="all, delete-orphan")
 
     def atualizar_status(self, novo_status: str) -> bool:
-        status_validos = {"Pendente", "Em andamento", "Concluído", "Cancelado"}
+        status_validos = {"Pendente", "Em preparo", "Entregue", "Concluído", "Cancelado"}
         if novo_status not in status_validos:
             return False
         self.status = novo_status
@@ -25,7 +28,7 @@ class ItemPedido(db.Model):
     produto_id = db.Column(db.Integer, db.ForeignKey('produto.id'), nullable=False)
     pedido_id = db.Column(db.Integer, db.ForeignKey('pedido.id'), nullable=False)
     quantidade = db.Column(db.Integer, nullable=False)
-    sabores = db.Column(db.String, nullable=True)
+    sabores = db.Column(db.String, nullable=True)  # ✅ campo de sabores
 
     produto = db.relationship('Produto', backref='itens_pedidos')
 

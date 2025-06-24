@@ -3,50 +3,43 @@
 {% block content %}
 <h2>Seu Carrinho</h2>
 {% if carrinho and carrinho|length > 0 %}
-<form id="sabores-form" method="post" action="#">
-<div class="carrinho-lista">
-    {% for item in carrinho %}
-    <div class="carrinho-item">
-        <img src="{{ url_for('static', filename=item.imagem) }}" alt="{{ item.nome }}" class="imagem-carrinho">
-        <div class="carrinho-info">
-            <h4>{{ item.nome }}</h4>
-            <ul>
-                {% for sabor in item.sabores %}
-                <li>{{ sabor }}</li>
-                {% endfor %}
-            </ul>
-            <p>Quantidade: {{ item.quantidade }}</p>
-            <p>Preço unitário: R${{ '%.2f'|format(item.preco) }}</p>
-            <p>Subtotal: <b>R${{ '%.2f'|format(item.subtotal) }}</b></p>
-            <div class="sabores-selecao" data-produto="{{ item.id }}" data-limite="{{ item.limite_sabores }}">
-                <label><b>Escolha seus sabores (máx {{ item.limite_sabores }}):</b></label>
-                {% for sabor in item.sabores %}
-                <div>
-                    <input type="checkbox"
-                           name="sabores_{{ item.id }}_{{ loop.index0 }}"
-                           value="{{ sabor }}"
-                           class="check-sabor"
-                           data-produto="{{ item.id }}">
-                    {{ sabor }}
+<form id="sabores-form" method="post">
+    <div class="carrinho-lista">
+        {% for item in carrinho %}
+        <div class="carrinho-item">
+            <img src="{{ url_for('static', filename=item.imagem) }}" alt="{{ item.nome }}" class="imagem-carrinho">
+            <div class="carrinho-info">
+                <h4>{{ item.nome }}</h4>
+                <p>Quantidade: {{ item.quantidade }}</p>
+                <p>Preço unitário: R${{ '%.2f'|format(item.preco) }}</p>
+                <p>Subtotal: <b>R${{ '%.2f'|format(item.subtotal) }}</b></p>
+
+                <div class="sabores-selecao" data-produto="{{ item.id }}" data-limite="{{ item.limite_sabores }}">
+                    <label><b>Escolha seus sabores (máx {{ item.limite_sabores }}):</b></label>
+                    {% for sabor in item.sabores %}
+                    <div>
+                        <input type="checkbox"
+                               name="sabores_{{ item.id }}_{{ loop.index0 }}"
+                               value="{{ sabor }}"
+                               class="check-sabor"
+                               data-produto="{{ item.id }}">
+                        {{ sabor }}
+                    </div>
+                    {% endfor %}
                 </div>
-                {% endfor %}
             </div>
-            <input type="hidden" name="quantidade_{{ item.id }}" value="{{ item.quantidade }}">
-            <input type="hidden" name="produto_id_{{ item.id }}" value="{{ item.id }}">
         </div>
+        {% endfor %}
     </div>
-    {% endfor %}
-</div>
 
-<div class="carrinho-total">
-    <h3>Total: R${{ '%.2f'|format(total) }}</h3>
-</div>
+    <div class="carrinho-total">
+        <h3>Total: R${{ '%.2f'|format(total) }}</h3>
+    </div>
 
-<div class="carrinho-actions">
-    <button type="submit" class="btn-voltar">Salvar sabores</button>
-    <a href="{{ url_for('produtos') }}" class="btn-voltar">Continuar comprando</a>
-    <a href="{{ url_for('finalizar_pedido') }}" class="btn-finalizar">Finalizar pedido</a>
-</div>
+    <div class="carrinho-actions">
+        <button type="submit" class="btn-voltar">Salvar sabores</button>
+        <a href="{{ url_for('produtos') }}" class="btn-voltar">Continuar comprando</a>
+    </div>
 </form>
 {% else %}
 <p>Seu carrinho está vazio.</p>
@@ -57,24 +50,38 @@
 {% block scripts %}
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-    if (sessionStorage.getItem("carrinho_enviado") === "sim") {
-        sessionStorage.removeItem("carrinho_enviado");
-        return;
+    const form = document.getElementById("sabores-form");
+    if (form) {
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const saboresSelecionados = {};
+            document.querySelectorAll(".sabores-selecao").forEach(box => {
+                const produtoId = box.dataset.produto;
+                const selecionados = Array.from(box.querySelectorAll(".check-sabor:checked"))
+                                          .map(chk => chk.value);
+                saboresSelecionados[produtoId] = selecionados;
+            });
+
+            const carrinho = JSON.parse(sessionStorage.getItem("carrinho") || "{}");
+
+            fetch("/sincronizar-carrinho", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    carrinho: carrinho,
+                    sabores: saboresSelecionados
+                })
+            }).then(() => {
+                sessionStorage.removeItem("carrinho");
+                sessionStorage.removeItem("sabores_selecionados");
+                sessionStorage.removeItem("carrinho_enviado");
+                window.location.href = "/finalizar-pedido";
+            });
+        });
     }
 
-    const carrinho = JSON.parse(sessionStorage.getItem("carrinho") || "{}");
-
-    if (Object.keys(carrinho).length === 0) return;
-
-    fetch("/carrinho", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ carrinho: carrinho })
-    }).then(() => {
-        sessionStorage.setItem("carrinho_enviado", "sim");
-        window.location.reload();
-    });
-
+    // Limite de sabores
     document.querySelectorAll('.sabores-selecao').forEach(function(box) {
         const limite = parseInt(box.getAttribute('data-limite'), 10);
         const checkboxes = box.querySelectorAll('.check-sabor');
@@ -88,6 +95,21 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         });
     });
+
+    // Auto-sincronização inicial (POST carrinho no primeiro acesso)
+    const carrinho = JSON.parse(sessionStorage.getItem("carrinho") || "{}");
+    const carrinhoEnviado = sessionStorage.getItem("carrinho_enviado");
+
+    if (Object.keys(carrinho).length > 0 && !carrinhoEnviado) {
+        fetch("/carrinho", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ carrinho: carrinho })
+        }).then(() => {
+            sessionStorage.setItem("carrinho_enviado", "sim");
+            window.location.reload();
+        });
+    }
 });
 </script>
 {% endblock %}

@@ -1,4 +1,5 @@
 import os
+import json
 from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -16,7 +17,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
 
-# Modelo local
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(100), nullable=False)
@@ -97,39 +97,41 @@ def produtos():
 @app.route('/carrinho', methods=['GET', 'POST'])
 def carrinho():
     usuario = get_usuario_logado()
+
+    if request.method == 'POST':
+        try:
+            data = request.get_json()
+            session['carrinho'] = data.get("carrinho", {})
+            session['sabores_selecionados'] = json.dumps(data.get("sabores", {}))
+            return jsonify({"status": "ok"})
+        except Exception as e:
+            return jsonify({"status": "erro", "mensagem": str(e)}), 500
+
+    carrinho_data = session.get("carrinho", {})
+    ids = [int(pid) for pid in carrinho_data.keys()]
+    produtos = Produto.query.filter(Produto.id.in_(ids)).all()
+
     itens = []
     total = 0.0
 
-    if request.method == 'POST':
-        data = request.get_json()
-        carrinho_data = data.get("carrinho", {})
-        ids = [int(pid) for pid in carrinho_data.keys()]
-        produtos = Produto.query.filter(Produto.id.in_(ids)).all()
-
-        for produto in produtos:
-            pid = str(produto.id)
-            qtd = carrinho_data.get(pid, 0)
-            subtotal = produto.preco * qtd
-            itens.append({
-                'id': produto.id,
-                'nome': produto.nome,
-                'imagem': produto.imagem,
-                'preco': produto.preco,
-                'quantidade': qtd,
-                'subtotal': subtotal,
-                'sabores': ["Brigadeiro", "Beijinho", "Moranguinho", "Limão", "Paçoquinha"],
-                'limite_sabores': 3 if "cento" in produto.nome.lower() else 2,
-                'sabores_escolhidos': []
-            })
-            total += subtotal
+    for produto in produtos:
+        pid = str(produto.id)
+        qtd = carrinho_data.get(pid, 0)
+        subtotal = produto.preco * qtd
+        itens.append({
+            'id': produto.id,
+            'nome': produto.nome,
+            'imagem': produto.imagem,
+            'preco': produto.preco,
+            'quantidade': qtd,
+            'subtotal': subtotal,
+            'sabores': ["Brigadeiro", "Beijinho", "Moranguinho", "Limão", "Paçoquinha"],
+            'limite_sabores': 3 if "cento" in produto.nome.lower() else 2,
+            'sabores_escolhidos': []
+        })
+        total += subtotal
 
     return render_template("carrinho.html", usuario=usuario, carrinho=itens, total=total)
-
-@app.route('/sincronizar-carrinho', methods=['POST'])
-def sincronizar_carrinho():
-    data = request.get_json()
-    session['carrinho'] = data.get('carrinho', {})
-    return jsonify({"status": "ok"})
 
 @app.route('/finalizar-pedido', methods=['GET', 'POST'])
 def finalizar_pedido():
@@ -137,6 +139,7 @@ def finalizar_pedido():
         nome = request.form.get('nome')
         email = request.form.get('email')
         carrinho = session.get('carrinho', {})
+        sabores_selecionados = json.loads(session.get('sabores_selecionados', '{}'))
 
         if not carrinho:
             flash("Seu carrinho está vazio!", "error")
@@ -154,11 +157,14 @@ def finalizar_pedido():
 
         for produto_id_str, qtd in carrinho.items():
             produto_id = int(produto_id_str)
-            item = ItemPedido(produto_id=produto_id, pedido_id=pedido.id, quantidade=qtd)
+            lista_sabores = sabores_selecionados.get(produto_id_str, [])
+            sabores_str = ",".join(lista_sabores)
+            item = ItemPedido(produto_id=produto_id, pedido_id=pedido.id, quantidade=qtd, sabores=sabores_str)
             db.session.add(item)
 
         db.session.commit()
-        session['carrinho'] = {}
+        session.pop('carrinho', None)
+        session.pop('sabores_selecionados', None)
 
         flash("Pedido realizado com sucesso! 🎉", "success")
         return redirect(url_for('home'))
@@ -192,7 +198,8 @@ def admin_detalhes_pedido(pedido_id):
             'nome': produto.nome,
             'quantidade': item.quantidade,
             'preco_unitario': produto.preco,
-            'subtotal': item.quantidade * produto.preco
+            'subtotal': item.quantidade * produto.preco,
+            'sabores': item.sabores
         })
 
     total = sum(p['subtotal'] for p in produtos)

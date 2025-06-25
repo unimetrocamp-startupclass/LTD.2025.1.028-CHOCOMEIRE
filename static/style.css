@@ -1,5 +1,8 @@
 body {
     background-color: #f6b6b3;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
 .navbar-custom {
@@ -369,9 +372,138 @@ body {
     text-decoration: none;
     font-weight: 600;
     transition: background 0.2s;
+    border: none;
+    display: inline-block;
 }
 .btn-voltar:hover {
     background: #3b2321;
+}
+
+/* Checkout / Finalizar Pedido */
+.checkout-container {
+    max-width: 540px;
+    background: #fff7f4;
+    margin: 48px auto 0 auto;
+    padding: 44px 38px 38px 38px;
+    border-radius: 26px;
+    box-shadow: 0 8px 32px #54261615, 0 1px 2px #d1447e12;
+    border: 3px dotted #e0bba5;
+}
+
+.checkout-title {
+    color: #542616;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 18px;
+    letter-spacing: 0.02em;
+    text-align: center;
+}
+
+.checkout-form-row {
+    display: flex;
+    gap: 22px;
+    margin-bottom: 16px;
+    justify-content: center;
+}
+
+.checkout-label {
+    color: #542616;
+    font-weight: 600;
+    font-size: 1.08rem;
+    margin-right: 4px;
+}
+
+.checkout-input {
+    border: 2px solid #f36aa8;
+    border-radius: 10px;
+    padding: 8px 12px;
+    font-size: 1.08rem;
+    background: #fff;
+    color: #3b2321;
+    transition: border 0.2s, box-shadow 0.2s;
+    outline: none;
+    width: 180px;
+}
+.checkout-input:focus {
+    border: 2.5px solid #d1447e;
+    box-shadow: 0 3px 12px #f36aa820;
+}
+
+.checkout-summary-card {
+    background: #fdf3ec;
+    border-radius: 18px;
+    border: 2px dotted #e0bba5;
+    box-shadow: 0 2px 10px #54261608;
+    padding: 20px 18px 18px 18px;
+    margin-top: 16px;
+    margin-bottom: 18px;
+}
+
+.checkout-summary-title {
+    color: #542616;
+    font-size: 1.38rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    letter-spacing: 0.01em;
+}
+
+.checkout-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 7px;
+    margin-bottom: 8px;
+}
+
+.checkout-table th, .checkout-table td {
+    color: #4b3432;
+    text-align: left;
+    font-size: 1.07rem;
+    padding: 6px 0 4px 0;
+}
+
+.checkout-table th {
+    font-size: 1.09rem;
+    font-weight: 700;
+    color: #542616;
+    border-bottom: 2px solid #e0bba5;
+}
+
+.checkout-table td:last-child, .checkout-table th:last-child {
+    text-align: right;
+}
+
+.checkout-total-row td {
+    font-weight: bold;
+    color: #d1447e;
+    font-size: 1.11rem;
+    border-top: 2px dotted #f36aa8;
+}
+
+.checkout-actions, .finalizar-actions {
+    display: flex;
+    gap: 20px;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.btn-confirmar {
+    background: linear-gradient(90deg, #f36aa8 0%, #fa9d91 100%);
+    color: #fff;
+    font-weight: 700;
+    padding: 12px 34px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    font-size: 1.14rem;
+    box-shadow: 0 4px 16px #f36aa830;
+    letter-spacing: 0.01em;
+    transition: background 0.2s, transform 0.12s, box-shadow 0.2s;
+    display: inline-block;
+}
+.btn-confirmar:hover, .btn-confirmar:focus {
+    background: linear-gradient(90deg, #d1447e 0%, #fa7d8c 100%);
+    box-shadow: 0 6px 22px #f36aa850;
+    transform: translateY(-2px) scale(1.04);
 }
 
 /* Responsividade */
@@ -382,6 +514,27 @@ body {
     .produto-card-grande {
         width: 96vw;
         max-width: 99vw;
+    }
+}
+@media (max-width: 700px) {
+    .checkout-container {
+        max-width: 98vw;
+        padding: 22px 3vw 22px 3vw;
+        margin: 20px 1vw 0 1vw;
+    }
+    .checkout-form-row {
+        flex-direction: column;
+        gap: 8px;
+        align-items: flex-start;
+    }
+    .checkout-input {
+        width: 98%;
+        min-width: 0;
+    }
+    .checkout-actions, .finalizar-actions {
+        flex-direction: column;
+        gap: 12px;
+        align-items: stretch;
     }
 }
 @media (max-width: 650px) {
@@ -397,6 +550,7 @@ body {
     }
 }
 
+/* Botões padrões */
 .btn-primary {
     background-color: #D93846;
     border-color: #b02534;
@@ -409,7 +563,6 @@ body {
     color: #fff;
 }
 
-/* Efeitos ao passar o mouse */
 .btn-primary:hover {
     background-color: #b02534;
     border-color: #891c27;

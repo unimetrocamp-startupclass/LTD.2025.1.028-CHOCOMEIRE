@@ -64,11 +64,21 @@
         document.getElementById('cart-qty').textContent = total;
     }
 
+    function syncCarrinhoBackend() {
+        const carrinho = JSON.parse(sessionStorage.getItem('carrinho'));
+        fetch('/carrinho', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ carrinho: carrinho, sabores: {} })
+        });
+    }
+
     function addToCart(produtoId) {
         const carrinho = JSON.parse(sessionStorage.getItem('carrinho'));
         carrinho[produtoId] = (carrinho[produtoId] || 0) + 1;
         sessionStorage.setItem('carrinho', JSON.stringify(carrinho));
         updateCartQtyDisplay();
+        syncCarrinhoBackend();
     }
 
     function removeFromCart(produtoId) {
@@ -81,13 +91,14 @@
             sessionStorage.setItem('carrinho', JSON.stringify(carrinho));
             updateCartQtyDisplay();
 
-            // Se o carrinho ficou vazio, sincroniza com o backend
             if (Object.keys(carrinho).length === 0) {
                 fetch('/carrinho', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ carrinho: {}, sabores: {} })
                 });
+            } else {
+                syncCarrinhoBackend();
             }
         }
     }

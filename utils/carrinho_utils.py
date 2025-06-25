@@ -40,23 +40,23 @@ def montar_item_carrinho(produto, quantidade, sabores_escolhidos=None, tema_esco
 
     # Cone Trufado
     elif 'cone trufado' in nome:
-        sabores = ['Brigadeiro', 'Beijinho', 'Moranguinho', 'Limão', 'Paçoquinha']
+        sabores = ['Brigadeiro', 'Beijinho', 'Moranguinho', 'Limão', 'Paçoquinha', 'Nutella']
         limite_sabores = quantidade
 
     # Barras
     elif 'barra recheada (branca, meio amargo, dois recheios)' in nome:
         tipo = tipo_barra or None  # tipo deve ser informado na interface
-        sabores = ['Brigadeiro', 'Beijinho', 'Morango', 'Coco', 'Limão', 'Paçoca']  # Exemplo, ajuste para seu contexto
+        sabores = ['Brigadeiro', 'Beijinho',  'Moranguinho', 'Limão', 'Paçoquinha', 'Nutella']  # Exemplo, ajuste para seu contexto
         limite_sabores = 2
     elif 'barra recheada' in nome:
-        sabores = ['Brigadeiro', 'Beijinho', 'Morango', 'Coco', 'Limão', 'Paçoca']
+        sabores = ['Brigadeiro', 'Beijinho',  'Moranguinho', 'Limão', 'Paçoquinha', 'Nutella']
         limite_sabores = 1
     elif 'meia barra recheada (branca, meio amargo)' in nome:
         tipo = tipo_barra or None
-        sabores = ['Brigadeiro', 'Beijinho', 'Morango', 'Coco', 'Limão', 'Paçoca']
+        sabores = ['Brigadeiro', 'Beijinho',  'Moranguinho', 'Limão', 'Paçoquinha', 'Nutella']
         limite_sabores = 1
     elif 'meia barra ao leite recheada' in nome:
-        sabores = ['Brigadeiro', 'Beijinho', 'Morango', 'Coco', 'Limão', 'Paçoca']
+        sabores = ['Brigadeiro', 'Beijinho',  'Moranguinho', 'Limão', 'Paçoquinha', 'Nutella']
         limite_sabores = 1
 
     # Delícias de Ninho
@@ -67,10 +67,10 @@ def montar_item_carrinho(produto, quantidade, sabores_escolhidos=None, tema_esco
 
     # Pão de Mel
     elif 'pão de mel grande' in nome:
-        sabores = ['Brigadeiro', 'Beijinho', 'Doce de Leite', 'Coco', 'Limão', 'Paçoca']
+        sabores = ['Brigadeiro', 'Beijinho', 'Doce de Leite']
         limite_sabores = quantidade
     elif 'pão de mel pequeno' in nome:
-        sabores = ['Brigadeiro', 'Beijinho', 'Doce de Leite', 'Coco', 'Limão', 'Paçoca']
+        sabores = ['Brigadeiro', 'Beijinho', 'Doce de Leite']
         limite_sabores = quantidade
 
     else:

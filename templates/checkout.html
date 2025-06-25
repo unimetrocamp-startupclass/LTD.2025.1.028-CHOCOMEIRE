@@ -29,12 +29,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% set total = 0 %}
+                    {% set total = [] %}
                     {% for pid, qtd in carrinho.items() %}
                         {% set produto = produtos[pid] %}
                         {% set sabs = sabores[pid] if sabores[pid] is defined else [] %}
                         {% set subtotal = produto.preco * qtd %}
-                        {% set total = total + subtotal %}
+                        {% set _ = total.append(subtotal) %}
                         <tr>
                             <td>{{ produto.nome }}</td>
                             <td>{{ qtd }}</td>
@@ -44,7 +44,7 @@
                     {% endfor %}
                     <tr class="checkout-total-row">
                         <td colspan="3"><strong>Total</strong></td>
-                        <td><strong>R${{ '%.2f'|format(total) }}</strong></td>
+                        <td><strong>R${{ '%.2f'|format(total|sum) }}</strong></td>
                     </tr>
                 </tbody>
             </table>

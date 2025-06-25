@@ -80,6 +80,15 @@
             }
             sessionStorage.setItem('carrinho', JSON.stringify(carrinho));
             updateCartQtyDisplay();
+
+            // Se o carrinho ficou vazio, sincroniza com o backend
+            if (Object.keys(carrinho).length === 0) {
+                fetch('/carrinho', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ carrinho: {}, sabores: {} })
+                });
+            }
         }
     }
 

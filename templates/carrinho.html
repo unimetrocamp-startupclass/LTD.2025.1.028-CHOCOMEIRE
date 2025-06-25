@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const carrinho = JSON.parse(sessionStorage.getItem("carrinho") || "{}");
 
-            fetch("/sincronizar-carrinho", {
+            fetch("/carrinho", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -103,7 +103,17 @@ document.addEventListener("DOMContentLoaded", function () {
     const carrinho = JSON.parse(sessionStorage.getItem("carrinho") || "{}");
     const carrinhoEnviado = sessionStorage.getItem("carrinho_enviado");
 
-    if (Object.keys(carrinho).length > 0 && !carrinhoEnviado) {
+    // NOVO: se carrinho vazio, garante limpeza no backend
+    if (Object.keys(carrinho).length === 0) {
+        fetch("/carrinho", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ carrinho: {}, sabores: {} })
+        }).then(() => {
+            sessionStorage.removeItem("carrinho_enviado");
+            window.location.reload();
+        });
+    } else if (!carrinhoEnviado) {
         fetch("/carrinho", {
             method: "POST",
             headers: { "Content-Type": "application/json" },

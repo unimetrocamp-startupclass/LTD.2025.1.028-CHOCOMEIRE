@@ -14,6 +14,11 @@
 
     <h2 class="titulo-centralizado">Produtos</h2>
 
+    <!-- Barra de pesquisa centralizada -->
+    <div class="search-bar-container">
+        <input type="text" id="search-input" class="search-bar" placeholder="Buscar produtos..." onkeyup="filtrarProdutos()"/>
+    </div>
+
     <div class="produtos-lista">
         {% for produto in produtos %}
         <div class="produto-card-grande">
@@ -80,5 +85,20 @@
 
     // Atualiza contador ao carregar página
     updateCartQtyDisplay();
+
+    // Filtro de produtos por nome
+    function filtrarProdutos() {
+        let input = document.getElementById('search-input');
+        let filtro = input.value.toLowerCase();
+        let cards = document.querySelectorAll('.produto-card-grande');
+        cards.forEach(card => {
+            let titulo = card.querySelector('h3').textContent.toLowerCase();
+            if (titulo.includes(filtro)) {
+                card.style.display = '';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
 </script>
 {% endblock %}

@@ -39,6 +39,32 @@ body {
     letter-spacing: 0.01em;
     color: #3b2321;
 }
+
+/* BARRA DE PESQUISA */
+.search-bar-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+    margin-top: 8px;
+}
+.search-bar {
+    width: 360px;
+    max-width: 90vw;
+    padding: 10px 20px;
+    border-radius: 24px;
+    border: 2px solid #f36aa8;
+    font-size: 1.13rem;
+    box-shadow: 0 2px 8px #f36aa830;
+    outline: none;
+    background: #fff;
+    color: #3b2321;
+    transition: border 0.2s, box-shadow 0.2s;
+}
+.search-bar:focus {
+    border: 2.5px solid #d1447e;
+    box-shadow: 0 3px 12px #f36aa850;
+}
+
 /* PRODUTOS LISTA E RESPONSIVIDADE */
 .produtos-lista {
     display: flex;

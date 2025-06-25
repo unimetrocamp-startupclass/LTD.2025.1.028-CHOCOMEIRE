@@ -9,6 +9,9 @@ from models.produto import Produto
 from models.cliente import Cliente
 from models.pedido import Pedido, ItemPedido
 
+# IMPORTANTE: Adicione este import
+from utils.carrinho_utils import montar_item_carrinho
+
 app = Flask(__name__)
 app.secret_key = 'sua_chave_secreta'
 
@@ -132,22 +135,14 @@ def carrinho():
     itens = []
     total = 0.0
 
+    # NOVA LÓGICA: usa a função utilitária para montar cada item conforme as regras de limite de sabores
     for produto in produtos:
         pid = str(produto.id)
         qtd = carrinho_data.get(pid, 0)
-        subtotal = produto.preco * qtd
-        itens.append({
-            'id': produto.id,
-            'nome': produto.nome,
-            'imagem': produto.imagem,
-            'preco': produto.preco,
-            'quantidade': qtd,
-            'subtotal': subtotal,
-            'sabores': ["Brigadeiro", "Beijinho", "Moranguinho", "Limão", "Paçoquinha"],
-            'limite_sabores': 3 if "cento" in produto.nome.lower() else 2,
-            'sabores_escolhidos': sabores_salvos.get(pid, [])
-        })
-        total += subtotal
+        sabores_escolhidos = sabores_salvos.get(pid, [])
+        item = montar_item_carrinho(produto.__dict__, qtd, sabores_escolhidos)
+        itens.append(item)
+        total += item['subtotal']
 
     return render_template("carrinho.html", usuario=usuario, carrinho=itens, total=total)
 

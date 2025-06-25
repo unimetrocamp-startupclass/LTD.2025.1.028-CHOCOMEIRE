@@ -48,7 +48,7 @@ def montar_item_carrinho(produto, quantidade, sabores_escolhidos=None, tema_esco
         tipo = tipo_barra or None  # tipo deve ser informado na interface
         sabores = ['Brigadeiro', 'Beijinho',  'Moranguinho', 'Limão', 'Paçoquinha', 'Nutella']  # Exemplo, ajuste para seu contexto
         limite_sabores = 2
-    elif 'barra recheada' in nome:
+    elif 'barra ao leite recheada' in nome:
         sabores = ['Brigadeiro', 'Beijinho',  'Moranguinho', 'Limão', 'Paçoquinha', 'Nutella']
         limite_sabores = 1
     elif 'meia barra recheada (branca, meio amargo)' in nome:

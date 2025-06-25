@@ -14,6 +14,7 @@
                 <p>Preço unitário: R${{ '%.2f'|format(item.preco) }}</p>
                 <p>Subtotal: <b>R${{ '%.2f'|format(item.subtotal) }}</b></p>
 
+                {% if item.limite_sabores > 0 and item.sabores %}
                 <div class="sabores-selecao" data-produto="{{ item.id }}" data-limite="{{ item.limite_sabores }}">
                     <label><b>Escolha seus sabores (máx {{ item.limite_sabores }}):</b></label>
                     {% for sabor in item.sabores %}
@@ -28,6 +29,7 @@
                     </div>
                     {% endfor %}
                 </div>
+                {% endif %}
             </div>
         </div>
         {% endfor %}

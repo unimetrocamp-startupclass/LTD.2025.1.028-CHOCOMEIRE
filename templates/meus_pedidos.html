@@ -10,7 +10,7 @@
         <th>#</th>
         <th>Data</th>
         <th>Status</th>
-        <th>Total</th>
+        <th>Total + PDF</th>
       </tr>
     </thead>
     <tbody>
@@ -21,6 +21,9 @@
         <td>{{ pedido.status }}</td>
         <td>
           R${{ '%.2f'|format(pedido.calcular_valor_total()) }}
+          <a href="{{ url_for('baixar_pdf_pedido', pedido_id=pedido.id) }}" class="btn btn-sm btn-outline-secondary ms-2" target="_blank">
+            📄 PDF
+          </a>
         </td>
       </tr>
       {% endfor %}

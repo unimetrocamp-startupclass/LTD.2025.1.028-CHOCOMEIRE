@@ -3,11 +3,13 @@ import json
 from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_migrate import Migrate
+from flask import send_file
 
 from models import db
 from models.produto import Produto
 from models.cliente import Cliente
 from models.pedido import Pedido, ItemPedido
+from utils.pdf_utils import gerar_pdf_pedido
 
 # IMPORTANTE: Adicione este import
 from utils.carrinho_utils import montar_item_carrinho
@@ -251,6 +253,22 @@ def excluir_pedido(pedido_id):
     flash("Pedido excluído com sucesso!", "success")
     return redirect(url_for('admin_dashboard'))
 
+@app.route('/meus-pedidos/<int:pedido_id>/pdf')
+def baixar_pdf_pedido(pedido_id):
+    usuario = get_usuario_logado()
+    if not usuario:
+        flash("É necessário estar logado para baixar o pedido.", "error")
+        return redirect(url_for('login'))
+
+    pedido = Pedido.query.get_or_404(pedido_id)
+
+    # Garante que o pedido pertence ao usuário logado
+    if pedido.cliente.email != usuario.email:
+        flash("Você não tem permissão para acessar esse pedido.", "error")
+        return redirect(url_for('meus_pedidos'))
+
+    pdf_path = gerar_pdf_pedido(pedido)
+    return send_file(pdf_path, as_attachment=True)
 
 if __name__ == '__main__':
     with app.app_context():

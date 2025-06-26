@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff7f2;
+            color: #4a2e2a;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            border: 2px solid #c69c6d;
+            border-radius: 10px;
+            padding: 20px;
+            background-color: #fffaf5;
+        }
+        h2 {
+            color: #7b3e1d;
+        }
+        .footer {
+            margin-top: 30px;
+            font-size: 0.9em;
+            color: #8b6f63;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>🍫 Pedido recebido com sucesso!</h2>
+        <p>Olá {{ nome_cliente }},</p>
+
+        <p>Ficamos muito felizes com o seu pedido na <strong>ChocoMeire</strong>! 😍</p>
+
+        <p>O PDF com os detalhes do seu pedido está em anexo neste e-mail.</p>
+
+        <p>Assim que for enviado, você receberá novas atualizações.</p>
+
+        <p>Qualquer dúvida, estamos por aqui!</p>
+
+        <div class="footer">
+            Com carinho,<br>
+            Equipe ChocoMeire 🍬<br>
+            <a href="mailto:contato@chocomeire.com.br">contato@chocomeire.com.br</a>
+        </div>
+    </div>
+</body>
+</html>

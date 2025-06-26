@@ -446,43 +446,30 @@ body {
     margin-bottom: 10px;
     letter-spacing: 0.01em;
 }
+
 .checkout-table {
     width: 100%;
     border-collapse: separate;
     border-spacing: 0 7px;
     margin-bottom: 8px;
-    table-layout: fixed; /* <-- NOVA LINHA */
 }
 
 .checkout-table th, .checkout-table td {
     color: #4b3432;
     text-align: left;
-    font-size: 1.15rem;
-    padding: 12px 0 10px 0;
-    background: transparent;
-    border: none;
-    white-space: nowrap; /* <-- NOVA LINHA */
+    font-size: 1.07rem;
+    padding: 6px 0 4px 0;
 }
 
 .checkout-table th {
-    font-size: 1.19rem;
+    font-size: 1.09rem;
     font-weight: 700;
     color: #542616;
     border-bottom: 2px solid #e0bba5;
-    background: transparent;
-}
-
-.checkout-table th:not(:last-child), .checkout-table td:not(:last-child) {
-    padding-right: 18px; /* <-- NOVA LINHA */
-}
-
-.checkout-table th, .checkout-table td {
-    border-right: none;
 }
 
 .checkout-table td:last-child, .checkout-table th:last-child {
     text-align: right;
-    padding-right: 0;
 }
 
 .checkout-total-row td {
@@ -492,29 +479,6 @@ body {
     border-top: 2px dotted #f36aa8;
 }
 
-.checkout-table tr {
-    background: transparent;
-}
-
-.checkout-table tbody tr {
-    border-radius: 10px;
-    background: none;
-}
-
-.checkout-table tr:not(.checkout-total-row):hover td {
-    background: #ffe4ef;
-    transition: background 0.15s;
-}
-
-@media (max-width: 700px) {
-    .checkout-table th, .checkout-table td {
-        font-size: 1.06rem;
-        padding: 8px 0 6px 0;
-    }
-    .checkout-table th:not(:last-child), .checkout-table td:not(:last-child) {
-        padding-right: 18px;
-    }
-}
 .checkout-actions, .finalizar-actions {
     display: flex;
     gap: 20px;

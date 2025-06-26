@@ -512,7 +512,7 @@ body {
         padding: 8px 0 6px 0;
     }
     .checkout-table th:not(:last-child), .checkout-table td:not(:last-child) {
-        padding-right: 8px;
+        padding-right: 18px;
     }
 }
 .checkout-actions, .finalizar-actions {

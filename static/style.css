@@ -601,6 +601,13 @@ body {
 .checkout-table th {
     font-size: 1.19rem;
 }
+.checkout-table th:not(:first-child)::before,
+.checkout-table td:not(:first-child)::before {
+    content: "|";
+    color: #e0bba5;    /* ou outra cor, se quiser mais escuro */
+    margin: 0 12px;
+    font-weight: bold;
+}
 
 /* Mais espaçamento nos botões no mobile */
 @media (max-width: 700px) {

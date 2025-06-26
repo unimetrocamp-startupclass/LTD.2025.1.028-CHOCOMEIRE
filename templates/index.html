@@ -14,14 +14,4 @@
         <a href="{{ url_for('cadastro') }}" class="btn btn-secondary">Cadastrar-se</a>
     {% endif %}
 </div>
-
-<!-- Instagram logo e texto no canto inferior direito -->
-<a href="https://instagram.com/seu_usuario" target="_blank" class="instagram-fixed">
-    <img src="{{ url_for('static', filename='logo.insta.png') }}" alt="Instagram" class="instagram-logo">
-    <span class="instagram-text">Choco.meire</span>
-</a>
-{% endblock %}
-
-{% block styles %}
-{{ super() }}
 {% endblock %}

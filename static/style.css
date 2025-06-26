@@ -618,29 +618,5 @@ body {
     }
     .checkout-form-group {
         min-width: 0;
-    }
-    .instagram-fixed {
-    position: fixed;
-    right: 20px;         /* Canto inferior direito */
-    bottom: 20px;
-    display: flex;
-    align-items: center;
-    background: rgba(255,255,255,0.85);
-    padding: 8px 14px;
-    border-radius: 25px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    z-index: 9999;
-    text-decoration: none;
-}
-.instagram-logo {
-    width: 28px;
-    height: 28px;
-    margin-right: 8px;
-}
-.instagram-text {
-    color: #3f729b;
-    font-weight: 600;
-    font-size: 16px;
-    letter-spacing: 0.5px;
-}
+   
 }

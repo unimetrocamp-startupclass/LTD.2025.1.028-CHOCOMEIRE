@@ -99,19 +99,17 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Auto-sincronização inicial do carrinho
+    // Auto-sincronização inicial do carrinho (sem reload infinito)
     const carrinho = JSON.parse(sessionStorage.getItem("carrinho") || "{}");
     const carrinhoEnviado = sessionStorage.getItem("carrinho_enviado");
 
-    // NOVO: se carrinho vazio, garante limpeza no backend
-    if (Object.keys(carrinho).length === 0) {
+    if (Object.keys(carrinho).length === 0 && !carrinhoEnviado) {
         fetch("/carrinho", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ carrinho: {}, sabores: {} })
         }).then(() => {
-            sessionStorage.removeItem("carrinho_enviado");
-            window.location.reload();
+            sessionStorage.setItem("carrinho_enviado", "sim");
         });
     } else if (!carrinhoEnviado) {
         fetch("/carrinho", {
@@ -120,7 +118,6 @@ document.addEventListener("DOMContentLoaded", function () {
             body: JSON.stringify({ carrinho: carrinho, sabores: {} })
         }).then(() => {
             sessionStorage.setItem("carrinho_enviado", "sim");
-            window.location.reload();
         });
     }
 });

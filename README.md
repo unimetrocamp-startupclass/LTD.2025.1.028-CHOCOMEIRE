@@ -224,8 +224,6 @@ Criar um site dinâmico e eficiente para o gerenciamento de encomendas de doces,
 | Desenvolvimento              | Utilizar Templates HTML e CSS para o front-end     | 24/04/2025     | 15/05/2025    | ✅ Concluída |
 | Design   | Criar Layout e fluxo do site     | 24/04/2025    | 15/05/2025     | ✅ Concluída |
 | Testes              |  Validar sistema de login e segurança, testar rotas, funcionalidades e integração com banco de dados, garantir que o design seja responsivo         | 30/04/2025     | 15/05/2025      | ✅ Concluída |
-|  |           |     |         |                                                                                   |
-|          |   |   |     | |
 
 
 ---

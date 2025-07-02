@@ -78,7 +78,6 @@ Criar um site dinâmico e eficiente para o gerenciamento de encomendas de doces,
 - **Framework:** Flask (para construir o back-end e estruturar o site).
 - **Banco de Dados:** SQLite (leve e integrado, perfeito para começar).
 - **ORM:** SQLAlchemy (orientação a objetos para interação com o banco de dados).
-- **Hospedagem:** PythonAnywhere (fácil de configurar e mantém o projeto na nuvem).
 
 ---
 
@@ -130,7 +129,6 @@ Criar um site dinâmico e eficiente para o gerenciamento de encomendas de doces,
 - Garantir que o design seja responsivo.
 
 ### Fase 4: Implantação
-- Configurar o projeto no PythonAnywhere.
 - Realizar testes de produção para confirmar funcionalidade.
 
 ### Fase 5: Feedback e Ajustes
@@ -225,7 +223,7 @@ Criar um site dinâmico e eficiente para o gerenciamento de encomendas de doces,
 | Desenvolvimento              | Criar as classes Python, desenvolver rotas Flask      | 24/04/2025     | 15/05/2025    | ✅ Concluída |
 | Desenvolvimento              | Utilizar Templates HTML e CSS para o front-end     | 24/04/2025     | 15/05/2025    | ✅ Concluída |
 | Design   | Criar Layout e fluxo do site     | 24/04/2025    | 15/05/2025     | ✅ Concluída |
-| Testes              |  Validar sistema de login e segurança, testar rotas, funcionalidades e integração com banco de dados, garantir que o design seja responsivo         | 30/04/2025     | 15/05/2025      | 🚧 Em andamento |
+| Testes              |  Validar sistema de login e segurança, testar rotas, funcionalidades e integração com banco de dados, garantir que o design seja responsivo         | 30/04/2025     | 15/05/2025      | ✅ Concluída |
 |  |           |     |         |                                                                                   |
 |          |   |   |     | |
 
@@ -247,7 +245,6 @@ Criar um site dinâmico e eficiente para o gerenciamento de encomendas de doces,
 - **HTML/CSS/JS**: Interface do usuário
 - **SQLite/**: Banco de dados
 - **SQLAlchemy/**: orientação a objetos
-- **PythonAnywhere/**: hospedagem do site
 - **Lucidchart/Draw.io**: Criação dos diagramas
 
 
